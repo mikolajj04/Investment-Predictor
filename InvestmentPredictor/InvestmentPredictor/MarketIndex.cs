@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace InvestmentPredictor
 {
-    internal class MarketIndex
+    public enum MarketIndex
     {
+        Custom,
+        SP500,
+        Nasdaq100,
+        WIG20,
+        Gold
     }
 }
