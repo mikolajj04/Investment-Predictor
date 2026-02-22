@@ -28,5 +28,9 @@
             return calculatedValue;
         }
 
+        public static void CalculateAnnualReturn() { 
+
+        }
+
     }
 }
