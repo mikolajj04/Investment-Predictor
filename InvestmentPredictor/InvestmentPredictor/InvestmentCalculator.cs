@@ -2,6 +2,16 @@
 {
     public class InvestmentCalculator
     {
+        public static decimal GetAnnualReturn(MarketIndex index) => index switch
+        {
+            MarketIndex.SP500 => 10.5m,
+            MarketIndex.Nasdaq100 => 14.4m,
+            MarketIndex.WIG20 => 6.2m,
+            MarketIndex.Gold => 7.8m,
+            _ => 0m
+
+
+        };
        public decimal CalculatedValue(decimal monthlySubsidy, decimal initialAmount, decimal annualReturn, int period)
         {
             decimal calculatedValue = initialAmount;
