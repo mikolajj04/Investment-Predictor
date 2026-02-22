@@ -12,7 +12,7 @@
 
 
         };
-       public decimal CalculatedValue(decimal monthlySubsidy, decimal initialAmount, decimal annualReturn, int period)
+       public static decimal CalculatedValue(decimal monthlySubsidy, decimal initialAmount, decimal annualReturn, int period)
         {
             decimal calculatedValue = initialAmount;
             for (int year = 1; year <= period; year++)
