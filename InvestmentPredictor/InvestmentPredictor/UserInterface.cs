@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace InvestmentPredictor
 {
     public static class UserInterface
@@ -67,10 +62,10 @@ namespace InvestmentPredictor
                     if (index == MarketIndex.Custom)
                     {
                         Console.WriteLine("Enter expected annual return rate (e.g. 10 for 10%): ");
-                        if (!decimal.TryParse(Console.ReadLine(), out annualReturn))
+                        if (!decimal.TryParse(Console.ReadLine(), out annualReturn) || annualReturn<0)
                         {
                             Console.Error.WriteLine("Enter proper annual return rate!");
-                            return GetAnnualReturn();
+                            continue;
 
                         }
                         return annualReturn;
@@ -82,7 +77,7 @@ namespace InvestmentPredictor
                         if (annualReturn == 0 && index != MarketIndex.Custom)
                         {
                             Console.Error.WriteLine("Choose option from the list!");
-                            return GetAnnualReturn();
+                            continue;
                         }
 
 
@@ -93,7 +88,7 @@ namespace InvestmentPredictor
                 {
 
                     Console.Error.WriteLine("Invalid option! ");
-                    return GetAnnualReturn();
+                    continue;
                 }
                 
 
