@@ -5,7 +5,7 @@ namespace InvestmentPredictor
     {
         static void Main(string[] args)
         {
-            var calculator = new InvestmentCalculator();
+            
             Console.WriteLine("-Investment Predictor v0.1-");
             Console.WriteLine("Select one of following indexes or choose custom option for custom ROI: ");
             Console.WriteLine("1. S&P 500 - 10.5%");
@@ -15,30 +15,37 @@ namespace InvestmentPredictor
             Console.WriteLine("5. Custom");
 
             decimal annualReturn;
-            ConsoleKeyInfo option = Console.ReadKey(true);
-            char charOption = option.KeyChar;
+            string input = Console.ReadLine();
             MarketIndex index = MarketIndex.Custom;
-            if (char.IsDigit(charOption))
+            if (int.TryParse(input, out int choice))
             {
-                if ((MarketIndex)char.GetNumericValue(charOption)== MarketIndex.Custom)
+                index = (MarketIndex)choice;
+                if (index== MarketIndex.Custom)
                 {
                     Console.WriteLine("Enter expected annual return rate (e.g. 10 for 10%): ");
-                    if (!decimal.TryParse(Console.ReadLine(), out  annualReturn))
+                    if (!decimal.TryParse(Console.ReadLine(), out annualReturn))
                     {
                         Console.Error.WriteLine("Enter proper annual return rate!");
                         return;
                     }
                 }
                 else { 
-                index = (MarketIndex)(int)char.GetNumericValue(charOption);
-                annualReturn = InvestmentCalculator.GetAnnualReturn(index);
+               
+                    annualReturn = InvestmentCalculator.GetAnnualReturn(index);
+                    if(annualReturn== 0 && index != MarketIndex.Custom)
+                    {
+                        Console.Error.WriteLine("Choose option from the list!");
+                        return;
+                    }
+                    
+
                 }
             }else{
 
                 Console.Error.WriteLine("Invalid option! ");
                 return;
             }
-          
+            Console.WriteLine($"Your annual return rate is {annualReturn}%.");
 
 
             Console.WriteLine("Enter initial investment amount: ");
@@ -70,10 +77,10 @@ namespace InvestmentPredictor
             //    Console.Error.WriteLine("Enter proper annual return rate!");
             //    return;
             //}
-            decimal calculatedValue = calculator.CalculatedValue(monthlySubsidy, initialAmount, annualReturn, period);
+            decimal calculatedValue = InvestmentCalculator.CalculatedValue(monthlySubsidy, initialAmount, annualReturn, period);
             
             
-            Console.WriteLine($"Total value after {period} years:  {calculatedValue:C} ");
+            Console.WriteLine($"Total value after {period} years: {calculatedValue:C} ");
         }
 
     }
