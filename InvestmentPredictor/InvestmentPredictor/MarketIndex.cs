@@ -8,10 +8,10 @@ namespace InvestmentPredictor
 {
     public enum MarketIndex
     {
-        Custom,
-        SP500,
-        Nasdaq100,
+        SP500= 1,
+        Nasdaq100, 
         WIG20,
-        Gold
+        Gold,
+        Custom
     }
 }
