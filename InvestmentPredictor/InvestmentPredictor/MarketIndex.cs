@@ -12,6 +12,10 @@ namespace InvestmentPredictor
         Nasdaq100, 
         WIG20,
         Gold,
+        MSCIWorld,
+        Russell2000,
+        MSCIEmergingMarkets,
+        DowJones,
         Custom
     }
 }

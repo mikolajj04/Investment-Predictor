@@ -4,10 +4,14 @@
     {
         public static decimal GetAnnualReturn(MarketIndex index) => index switch
         {
-            MarketIndex.SP500 => 10.5m,
-            MarketIndex.Nasdaq100 => 14.4m,
-            MarketIndex.WIG20 => 6.2m,
+            MarketIndex.SP500 => 10.4m,
+            MarketIndex.Nasdaq100 => 16.2m,
+            MarketIndex.WIG20 => 5.2m,
             MarketIndex.Gold => 7.8m,
+            MarketIndex.MSCIWorld => 8.9m,
+            MarketIndex.Russell2000=> 8.2m,
+            MarketIndex.MSCIEmergingMarkets => 5.9m,
+            MarketIndex.DowJones => 7.4m,
             _ => 0m
 
 
