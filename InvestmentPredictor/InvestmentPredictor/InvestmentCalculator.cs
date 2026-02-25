@@ -7,7 +7,7 @@
             MarketIndex.SP500 => 10.4m,
             MarketIndex.Nasdaq100 => 16.2m,
             MarketIndex.WIG20 => 5.2m,
-            MarketIndex.Gold => 7.8m,
+            MarketIndex.Gold => 8.5m,
             MarketIndex.MSCIWorld => 8.9m,
             MarketIndex.Russell2000=> 8.2m,
             MarketIndex.MSCIEmergingMarkets => 5.9m,

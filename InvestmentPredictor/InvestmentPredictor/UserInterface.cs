@@ -11,8 +11,12 @@ namespace InvestmentPredictor
             Console.WriteLine("1. S&P 500 - 10.5%");
             Console.WriteLine("2. Nasdaq100 - 14,4%");
             Console.WriteLine("3. WIG20 - 6,2%");
-            Console.WriteLine("4. Gold - 7,8%");
-            Console.WriteLine("5. Custom");
+            Console.WriteLine("4. Gold - 8,5%");
+            Console.WriteLine("5. MSCI World - 8,9%");
+            Console.WriteLine("6. Russell 2000 - 8,2%");
+            Console.WriteLine("7. MSCIEmergingMarkets - 5,9%");
+            Console.WriteLine("8. Dow Jones - 7,4%");
+            Console.WriteLine("9. Custom");
             Console.WriteLine("---------------------------------");
         }
 
