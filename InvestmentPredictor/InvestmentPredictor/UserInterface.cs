@@ -1,8 +1,16 @@
 ﻿
 namespace InvestmentPredictor
 {
-    public static class UserInterface
+    public class UserInterface
     {
+        private readonly IInvestmentCalculator _calculator;
+
+        public UserInterface(InvestmentCalculator calculator)
+        {
+            _calculator = calculator;
+
+        }
+
         public static void DisplayMenu(string version)
         {
 
@@ -20,7 +28,7 @@ namespace InvestmentPredictor
             Console.WriteLine("---------------------------------");
         }
 
-        public static decimal ReadDecimal(string message)
+        public decimal ReadDecimal(string message)
         {
             while (true)
             {
@@ -39,7 +47,7 @@ namespace InvestmentPredictor
 
         }
 
-        public static int ReadInt(string message)
+        public int ReadInt(string message)
         {
             while (true)
             {
@@ -53,7 +61,7 @@ namespace InvestmentPredictor
             }
         }
 
-        public static decimal GetAnnualReturn()
+        public decimal GetAnnualReturn()
         {
             while (true)
             {
@@ -77,7 +85,7 @@ namespace InvestmentPredictor
                     else
                     {
 
-                        annualReturn = InvestmentCalculator.GetAnnualReturn(index);
+                        annualReturn = _calculator.GetIndexAnnualReturn(index);
                         if (annualReturn == 0 && index != MarketIndex.Custom)
                         {
                             Console.Error.WriteLine("Choose option from the list!");
