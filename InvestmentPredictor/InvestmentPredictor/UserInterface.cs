@@ -5,7 +5,7 @@ namespace InvestmentPredictor
     {
         private readonly IInvestmentCalculator _calculator;
 
-        public UserInterface(InvestmentCalculator calculator)
+        public UserInterface(IInvestmentCalculator calculator)
         {
             _calculator = calculator;
 
