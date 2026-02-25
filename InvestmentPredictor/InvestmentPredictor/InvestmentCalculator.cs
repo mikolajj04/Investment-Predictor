@@ -1,8 +1,8 @@
 ﻿namespace InvestmentPredictor
 {
-    public class InvestmentCalculator
+    public class InvestmentCalculator : IInvestmentCalculator
     {
-        public static decimal GetAnnualReturn(MarketIndex index) => index switch
+        public decimal GetIndexAnnualReturn(MarketIndex index) => index switch
         {
             MarketIndex.SP500 => 10.4m,
             MarketIndex.Nasdaq100 => 16.2m,
@@ -16,7 +16,7 @@
 
 
         };
-       public static decimal CalculatedValue(decimal monthlySubsidy, decimal initialAmount, decimal annualReturn, int period)
+       public decimal CalculatedValue(decimal monthlySubsidy, decimal initialAmount, decimal annualReturn, int period)
         {
             decimal calculatedValue = initialAmount;
             for (int year = 1; year <= period; year++)
@@ -32,9 +32,7 @@
             return calculatedValue;
         }
 
-        public static void CalculateAnnualReturn() { 
-
-        }
+       
 
     }
 }
