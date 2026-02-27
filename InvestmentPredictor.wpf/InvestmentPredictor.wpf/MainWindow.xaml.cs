@@ -27,15 +27,21 @@ namespace InvestmentPredictor.wpf
 
         private void CalculateButton_Click(object sender, RoutedEventArgs e)
         {
+            int period = int.Parse(Period.Text);
+            decimal monthlySubsidy = decimal.Parse(MonthlySubsidy.Text);
             decimal inital = decimal.Parse(InitialAmountInput.Text);
             MarketIndex selectedIndex = (MarketIndex)IndexSelector.SelectedIndex;
             decimal annualReturn = _calculator.GetIndexAnnualReturn(selectedIndex);
-            decimal result = _calculator.CalculatedValue(500, inital, annualReturn, 10);
+            decimal result = _calculator.CalculatedValue(monthlySubsidy, inital, annualReturn, period);
+            
             ResultDisplay.Text = $"Predicted Value: {result:C}";
 
 
         }
 
-        
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }
