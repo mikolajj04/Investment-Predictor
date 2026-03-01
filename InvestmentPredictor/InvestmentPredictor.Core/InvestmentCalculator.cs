@@ -32,7 +32,20 @@
             return calculatedValue;
         }
 
-       
+      public  decimal getPureReturnValue(decimal monthlySubsidy, decimal initialAmount, decimal annualReturn, int period)
+        {
+            decimal calculatedValue = CalculatedValue(monthlySubsidy, initialAmount, annualReturn, period);
+
+            decimal sumOfSubsidy = initialAmount + (monthlySubsidy * 12 * period);
+
+
+            return calculatedValue-sumOfSubsidy;
+
+
+
+        }
+
+
 
     }
 }
