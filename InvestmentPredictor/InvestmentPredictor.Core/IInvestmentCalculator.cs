@@ -13,6 +13,7 @@ namespace InvestmentPredictor
 
         decimal getPureReturnValue(decimal monthlySubsidy, decimal initialAmount, decimal annualReturn, int period);
 
-        decimal CalculateTax(decimal monthlySubsidy, decimal initialAmount, decimal annualReturn, int period);
+        decimal CalculateTaxValue(decimal monthlySubsidy, decimal initialAmount, decimal annualReturn, int period);
+        decimal totalValueAfterTax(decimal monthlySubsidy, decimal initialAmount, decimal annualReturn, int period);
     }
 }

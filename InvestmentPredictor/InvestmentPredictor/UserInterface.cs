@@ -34,7 +34,7 @@ namespace InvestmentPredictor
             {
                 Console.WriteLine(message);
                 string input = Console.ReadLine();
-                if (decimal.TryParse(input, out decimal result) && result > 0)
+                if (decimal.TryParse(input, out decimal result) && result >= 0)
                 {
                     return result;
                 }

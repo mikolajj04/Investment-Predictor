@@ -15,9 +15,13 @@ namespace InvestmentPredictor
             decimal monthlySubsidy = ui.ReadDecimal("How much do you want to subsidize monthly?: ");
             decimal calculatedValue = calculator.CalculatedValue(monthlySubsidy, initialAmount, annualReturn, period);
             decimal pureReturn = calculator.getPureReturnValue(monthlySubsidy, initialAmount, annualReturn, period);
-
+            decimal tax = calculator.totalValueAfterTax(monthlySubsidy, initialAmount, annualReturn, period);
             Console.WriteLine($"Total value after {period} years: {calculatedValue:C}");
+
+            //zjebane 
             Console.WriteLine($"Pure return value of your investment is {pureReturn:C}");
+            Console.WriteLine($"Value after tax: {tax:C}");
+
         }
 
     }
