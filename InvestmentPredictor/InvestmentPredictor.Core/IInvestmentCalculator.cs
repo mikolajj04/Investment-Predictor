@@ -13,9 +13,9 @@ namespace InvestmentPredictor
         decimal GetIndexAnnualReturn(MarketIndex index);
         decimal CalculatedValue(CalculatorParams p);
 
-        decimal getPureReturnValue(CalculatorParams p);
+        decimal GetPureReturnValue(CalculatorParams p);
 
         decimal CalculateTaxValue(CalculatorParams p);
-        decimal totalValueAfterTax(CalculatorParams p);
+        decimal TotalValueAfterTax(CalculatorParams p);
     }
 }
