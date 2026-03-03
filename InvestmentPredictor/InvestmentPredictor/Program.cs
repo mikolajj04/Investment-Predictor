@@ -16,14 +16,14 @@ namespace InvestmentPredictor
             var calculatorParams=new CalculatorParams(monthlySubsidy, initialAmount, annualReturn, period);
             decimal calculatedValue = calculator.CalculatedValue(calculatorParams);
             decimal pureReturn = calculator.GetPureReturnValue(calculatorParams);
-            decimal tax = calculator.TotalValueAfterTax(calculatorParams);
+            decimal finalNetValue = calculator.TotalValueAfterTax(calculatorParams);
             Console.WriteLine($"Total value after {period} years: {calculatedValue:C}");
 
             //Debug Line 
             Console.WriteLine($"Pure return value of your investment is {pureReturn:C}");
 
             Console.WriteLine("-------------------------------------------------------");
-            Console.WriteLine($"Your overall total value after tax: {tax:C}");
+            Console.WriteLine($"Your overall total value after tax: {finalNetValue:C}");
 
         }
 
