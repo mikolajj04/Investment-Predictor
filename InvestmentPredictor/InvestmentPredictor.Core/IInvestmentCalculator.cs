@@ -16,6 +16,6 @@ namespace InvestmentPredictor
         decimal getPureReturnValue(CalculatorParams p);
 
         decimal CalculateTaxValue(CalculatorParams p);
-        decimal totalValueAfterTax(Func<decimal> calculateValue, Func<decimal> pureProfit, Func<decimal> pureProfitAfterTax);
+        decimal totalValueAfterTax(CalculatorParams p);
     }
 }
