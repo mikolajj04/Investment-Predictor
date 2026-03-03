@@ -32,7 +32,7 @@
             return calculatedValue;
         }
 
-      public  decimal getPureReturnValue(CalculatorParams p)
+      public  decimal GetPureReturnValue(CalculatorParams p)
         {
             decimal calculatedValue = CalculatedValue(p);
 
@@ -48,12 +48,12 @@
         public decimal CalculateTaxValue(CalculatorParams p)
         {
             const decimal taxRate= 0.19m;
-            decimal pureProfit= getPureReturnValue(p); ;
+            decimal pureProfit= GetPureReturnValue(p); ;
             return pureProfit * taxRate;
 
         }
 
-        public decimal totalValueAfterTax(CalculatorParams p) {
+        public decimal TotalValueAfterTax(CalculatorParams p) {
             return CalculatedValue(p) - CalculateTaxValue(p);
         }
         
