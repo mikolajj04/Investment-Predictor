@@ -5,7 +5,7 @@
         public decimal GetIndexAnnualReturn(MarketIndex index) => index switch
         {
             MarketIndex.SP500 => 10.4m,
-            MarketIndex.Nasdaq100 => 16.2m,
+            MarketIndex.Nasdaq100 => 14.4m,
             MarketIndex.WIG20 => 5.2m,
             MarketIndex.Gold => 8.5m,
             MarketIndex.MSCIWorld => 8.9m,
@@ -16,15 +16,15 @@
 
 
         };
-       public decimal CalculatedValue(decimal monthlySubsidy, decimal initialAmount, decimal annualReturn, int period)
+       public decimal CalculatedValue(CalculatorParams p)
         {
-            decimal calculatedValue = initialAmount;
-            for (int year = 1; year <= period; year++)
+            decimal calculatedValue = p.initialAmount;
+            for (int year = 1; year <= p.period; year++)
             {
                 for (int month = 1; month <= 12; month++)
                 {
-                    calculatedValue += monthlySubsidy;
-                    calculatedValue += calculatedValue * annualReturn / 100 / 12;
+                    calculatedValue += p.monthlySubsidy;
+                    calculatedValue += calculatedValue * p.annualReturn / 100 / 12;
                 }
 
 
@@ -32,11 +32,11 @@
             return calculatedValue;
         }
 
-      public  decimal getPureReturnValue(decimal monthlySubsidy, decimal initialAmount, decimal annualReturn, int period)
+      public  decimal getPureReturnValue(CalculatorParams p)
         {
-            decimal calculatedValue = CalculatedValue(monthlySubsidy, initialAmount, annualReturn, period);
+            decimal calculatedValue = CalculatedValue(p);
 
-            decimal sumOfSubsidy = initialAmount + (monthlySubsidy * 12 * period);
+            decimal sumOfSubsidy = p.initialAmount + (p.monthlySubsidy * 12 * p.period);
 
 
             return calculatedValue-sumOfSubsidy;
@@ -45,16 +45,16 @@
 
         }
 
-        public decimal CalculateTaxValue(decimal monthlySubsidy, decimal initialAmount, decimal annualReturn, int period)
+        public decimal CalculateTaxValue(CalculatorParams p)
         {
             const decimal taxRate= 0.19m;
-            decimal pureProfit= getPureReturnValue(monthlySubsidy, initialAmount, annualReturn, period); ;
-            return pureProfit - pureProfit * taxRate;
+            decimal pureProfit= getPureReturnValue(p); ;
+            return pureProfit * taxRate;
 
         }
 
-        public decimal totalValueAfterTax(Func<decimal> calculateValue,Func<decimal> pureProfit, Func<decimal> pureProfitAfterTax) {
-            return (calculateValue() - pureProfit()) + pureProfitAfterTax();
+        public decimal totalValueAfterTax(CalculatorParams p) {
+            return CalculatedValue(p) - CalculateTaxValue(p);
         }
         
 
