@@ -45,6 +45,20 @@
 
         }
 
+        public decimal CalculateTaxValue(decimal monthlySubsidy, decimal initialAmount, decimal annualReturn, int period)
+        {
+            const decimal taxRate= 0.19m;
+            decimal pureProfit= getPureReturnValue(monthlySubsidy, initialAmount, annualReturn, period); ;
+            return pureProfit - pureProfit * taxRate;
+
+        }
+
+        public decimal totalValueAfterTax(decimal monthlySubsidy, decimal initialAmount, decimal annualReturn, int period) {
+            decimal pureProfitAfterTax = CalculateTaxValue(monthlySubsidy, initialAmount, annualReturn, period);
+            decimal pureProfit= getPureReturnValue(monthlySubsidy,initialAmount, annualReturn, period);
+            return (CalculatedValue(monthlySubsidy, initialAmount, annualReturn, period) - pureProfit) + pureProfitAfterTax;
+        }
+        
 
 
     }
