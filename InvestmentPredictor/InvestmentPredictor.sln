@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvestmentPredictor", "Inve
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvestmentPredictor.Core", "InvestmentPredictor.Core\InvestmentPredictor.Core.csproj", "{8984C796-6DAB-49FC-91C8-73F11DAB9499}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvestmentPredictor.api", "InvestmentPredictor.api\InvestmentPredictor.api.csproj", "{CA1AF64B-392B-3D94-71D5-19561C468CFA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{8984C796-6DAB-49FC-91C8-73F11DAB9499}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8984C796-6DAB-49FC-91C8-73F11DAB9499}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8984C796-6DAB-49FC-91C8-73F11DAB9499}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA1AF64B-392B-3D94-71D5-19561C468CFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA1AF64B-392B-3D94-71D5-19561C468CFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA1AF64B-392B-3D94-71D5-19561C468CFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA1AF64B-392B-3D94-71D5-19561C468CFA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
