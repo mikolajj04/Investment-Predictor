@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace InvestmentPredictor
 {
 
-    public record CalculatorParams(decimal monthlySubsidy, decimal initialAmount, decimal annualReturn, int period);
+    public record CalculatorParams(
+        [Range(0, 1000000000)] decimal monthlySubsidy,
+        [Range(0, 1000000000)] decimal initialAmount,
+        [Range(0, 100)] decimal annualReturn,
+        [Range(1,200)] int period);
     public interface IInvestmentCalculator
     {
         decimal GetIndexAnnualReturn(MarketIndex index);
