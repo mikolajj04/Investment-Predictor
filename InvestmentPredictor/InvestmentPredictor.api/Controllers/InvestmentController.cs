@@ -19,8 +19,8 @@ namespace InvestmentPredictor.Api.Controllers
         public IActionResult Calculate([FromBody] CalculatorParams p)
         {
             // Zwracamy obiekt anonimowy, który ASP.NET zamieni na JSON
-            decimal rate = p.choosenIndex != MarketIndex.Custom
-                ? _calculator.GetIndexAnnualReturn(p.choosenIndex)
+            decimal rate = p.chosenIndex != MarketIndex.Custom
+                ? _calculator.GetIndexAnnualReturn(p.chosenIndex)
                 : (p.customAnnualReturn ?? 0);
 
             var finalParams = p with { annualReturn = rate };
