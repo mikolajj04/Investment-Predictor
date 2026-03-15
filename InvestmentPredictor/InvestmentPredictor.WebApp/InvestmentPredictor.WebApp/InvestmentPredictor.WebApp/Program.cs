@@ -1,3 +1,4 @@
+using InvestmentPredictor;
 using InvestmentPredictor.WebApp.Client.Pages;
 using InvestmentPredictor.WebApp.Components;
 
@@ -6,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveWebAssemblyComponents();
+builder.Services.AddScoped<IInvestmentCalculator, InvestmentCalculator>();
 
 var app = builder.Build();
 
