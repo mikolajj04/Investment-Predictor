@@ -16,7 +16,17 @@
                         <label class="form-label font-weight-bold">Kwota początkowa (PLN)</label>
                         <input type="number" class="form-control" @bind="initialAmount" />
                     </div>
+                    <div class="mb-3">
+                        <label class="form-label font-weight-bold"> Miesięczna dopłata (PLN)</label>
+                        <input type="number" class="form-control" @bind="monthlySubsidy" />
 
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label font-weight-bold"> Czas inwestycji (lata)</label>
+                        <input type="number" class="form-control" @bind="period"></input>
+
+                    </div>
                     <div class="mb-3">
                         <label class="form-label font-weight-bold">Wybierz Indeks</label>
                         <select class="form-select" @bind="chosenIndex">
@@ -25,7 +35,16 @@
                                 <option value="@index">@index</option>
                             }
                         </select>
+                        @if(chosenIndex==MarketIndex.Custom){
+
+                        <div class="mb-3">
+                            <label class="form-label font-weight-bold"> ROI rate</label>
+                            <input type="number" class="form-control" @bind="customRate"></input>
+
+                        </div>
+                        }
                     </div>
+
 
                     <button class="btn btn-success btn-lg w-100" @onclick="Calculate">
                         Oblicz zysk
@@ -55,18 +74,26 @@
 
 @code {
     // Luźne zmienne do bindowania formularza
+    private decimal customRate = 0;
+    private decimal monthlySubsidy;
     private decimal initialAmount;
     private MarketIndex chosenIndex = MarketIndex.SP500;
     private decimal finalResult;
+    private int period;
 
     private void Calculate()
     {
         // 1. Tworzymy paczkę danych (używamy konstruktora, który masz w .Core)
         // Zakładam, że Twój rekord ma: Index, Initial, Monthly, Interest, Tax, Years
-        var inputParams = new CalculatorParams(chosenIndex, initialAmount, 0, 0, 0, 1);
+        var inputParams = new CalculatorParams(chosenIndex,monthlySubsidy, initialAmount, customRate, 0, period);
 
         // 2. Pobieramy stopę zwrotu z kalkulatora (logika z Twojego .Core)
         decimal rate = Calc.GetIndexAnnualReturn(inputParams.chosenIndex);
+
+        if (customRate > 0)
+        {
+            rate = customRate;
+        }
 
         // 3. Obliczamy wynik końcowy korzystając z Twojej metody TotalValueAfterTax
         // Używamy słowa 'with', żeby podmienić tylko stopę zwrotu
