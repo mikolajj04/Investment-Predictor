@@ -2,103 +2,29 @@
 @using InvestmentPredictor
 @inject IInvestmentCalculator Calc
 
-<PageTitle>Kalkulator Inwestycyjny</PageTitle>
+<PageTitle>Investment Calculator</PageTitle>
 
-<div class="container mt-5">
-    <div class="card shadow">
-        <div class="card-header bg-primary text-white">
-            <h3 class="mb-0">Symulator Inwestycji</h3>
-        </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="mb-3">
-                        <label class="form-label font-weight-bold">Kwota początkowa (PLN)</label>
-                        <input type="number" class="form-control" @bind="initialAmount" />
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label font-weight-bold"> Miesięczna dopłata (PLN)</label>
-                        <input type="number" class="form-control" @bind="monthlySubsidy" />
-
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label font-weight-bold"> Czas inwestycji (lata)</label>
-                        <input type="number" class="form-control" @bind="period"></input>
-
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label font-weight-bold">Wybierz Indeks</label>
-                        <select class="form-select" @bind="chosenIndex">
-                            @foreach (var index in Enum.GetValues<MarketIndex>())
-                            {
-                                <option value="@index">@index</option>
-                            }
-                        </select>
-                        @if(chosenIndex==MarketIndex.Custom){
-
-                        <div class="mb-3">
-                            <label class="form-label font-weight-bold"> ROI rate</label>
-                            <input type="number" class="form-control" @bind="customRate"></input>
-
-                        </div>
-                        }
-                    </div>
+<div class="container-md  card shadow mt-2>"
+	<div class="container-md bg-light mb-2 rounded-pill "
+	<h2>Investment predictor</h2>
+	</div> 
+<label class="form-label font-weight-bold"> Initial Investment	</label>
+<input type="number" class="form-control" @bind=initialAmount />
+<label class="form-label font-weight-bold"> Period</label>
+<input type="number" class="form-control" @bind=period />
+<label class="form-label font-weight-bold" placeholder="Enter your monthly subsidy" > Monthly Subsidy</label> 
+<input type="number" class="form-control"  @bind=monthlySubsidy />
+<label class="form-label font-weight-bold"> Choose your index</label>
 
 
-                    <button class="btn btn-success btn-lg w-100" @onclick="Calculate">
-                        Oblicz zysk
-                    </button>
-                </div>
 
-                <div class="col-md-6 d-flex align-items-center justify-content-center">
-                    @if (finalResult > 0)
-                    {
-                        <div class="text-center p-4 border rounded bg-light w-100">
-                            <h5 class="text-muted">Przewidywana wartość:</h5>
-                            <h2 class="text-success display-4">@finalResult.ToString("C")</h2>
-                            <p class="small text-secondary mt-2">*Obliczenia uwzględniają podatek Belki</p>
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="text-center text-muted">
-                            <p>Wprowadź dane i kliknij przycisk, aby zobaczyć symulację.</p>
-                        </div>
-                    }
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
-@code {
-    // Luźne zmienne do bindowania formularza
-    private decimal customRate = 0;
-    private decimal monthlySubsidy;
-    private decimal initialAmount;
-    private MarketIndex chosenIndex = MarketIndex.SP500;
-    private decimal finalResult;
-    private int period;
+	</div>
 
-    private void Calculate()
-    {
-        // 1. Tworzymy paczkę danych (używamy konstruktora, który masz w .Core)
-        // Zakładam, że Twój rekord ma: Index, Initial, Monthly, Interest, Tax, Years
-        var inputParams = new CalculatorParams(chosenIndex,monthlySubsidy, initialAmount, customRate, 0, period);
 
-        // 2. Pobieramy stopę zwrotu z kalkulatora (logika z Twojego .Core)
-        decimal rate = Calc.GetIndexAnnualReturn(inputParams.chosenIndex);
 
-        if (customRate > 0)
-        {
-            rate = customRate;
-        }
-
-        // 3. Obliczamy wynik końcowy korzystając z Twojej metody TotalValueAfterTax
-        // Używamy słowa 'with', żeby podmienić tylko stopę zwrotu
-        var finalParams = inputParams with { annualReturn = rate };
-
-        finalResult = Calc.TotalValueAfterTax(finalParams);
-    }
-}
+	@code{
+		private decimal? initialAmount;
+		private decimal? period;
+		private int? monthlySubsidy;
+	}
