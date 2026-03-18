@@ -5,17 +5,37 @@
 <PageTitle>Investment Calculator</PageTitle>
 
 <div class="container-md  card shadow mt-2>"
-	<div class="container-md bg-light mb-2 rounded-pill "
+
+	<div class="bg-light mb-2 rounded-pill "
 	<h2>Investment predictor</h2>
 	</div> 
+
+	<div class="mb-3">
 <label class="form-label font-weight-bold"> Initial Investment	</label>
 <input type="number" class="form-control" @bind=initialAmount />
+</div>
+
+<div class="mb-3">
 <label class="form-label font-weight-bold"> Period</label>
 <input type="number" class="form-control" @bind=period />
+</div>
+
+<div class="mb-3">
 <label class="form-label font-weight-bold" placeholder="Enter your monthly subsidy" > Monthly Subsidy</label> 
 <input type="number" class="form-control"  @bind=monthlySubsidy />
-<label class="form-label font-weight-bold"> Choose your index</label>
+</div>
 
+<div class="mb-3">
+<label class="form-label font-weight-bold"> Choose your index</label>
+<select class="form-select" @bind="chosenIndex"> 
+			@foreach(var index in Enum.GetValues<MarketIndex>())
+			{
+				<option value="@index">@index</option>
+			}
+			
+			
+		</select>
+</div>
 
 
 
@@ -24,7 +44,9 @@
 
 
 	@code{
+		
 		private decimal? initialAmount;
 		private decimal? period;
 		private int? monthlySubsidy;
+		private MarketIndex? chosenIndex;
 	}
