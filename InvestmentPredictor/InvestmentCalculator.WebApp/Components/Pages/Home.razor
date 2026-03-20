@@ -4,49 +4,60 @@
 
 <PageTitle>Investment Calculator</PageTitle>
 
-<div class="container-md  card shadow mt-2>"
+<div class="container-md card shadow mt-2">
 
-	<div class="bg-light mb-2 rounded-pill "
-	<h2>Investment predictor</h2>
-	</div> 
+	<div class="bg-light mb-5 rounded-pill  text-center fw-bolder">
+		<h1>Investment predictor</h1>
+	</div>
 
 	<div class="mb-3">
-<label class="form-label font-weight-bold"> Initial Investment	</label>
-<input type="number" class="form-control" @bind=initialAmount />
-</div>
+	<label class="form-label font-weight-bold"> Initial Investment	</label>
+	<input type="number" class="form-control" @bind=initialAmount />
+	</div>
 
-<div class="mb-3">
-<label class="form-label font-weight-bold"> Period</label>
-<input type="number" class="form-control" @bind=period />
-</div>
+	<div class="mb-3">
+	<label class="form-label font-weight-bold"> Period</label>
+	<input type="number" class="form-control" @bind=period />
+	</div>
 
-<div class="mb-3">
-<label class="form-label font-weight-bold" placeholder="Enter your monthly subsidy" > Monthly Subsidy</label> 
-<input type="number" class="form-control"  @bind=monthlySubsidy />
-</div>
+	<div class="mb-3">
+	<label class="form-label font-weight-bold" placeholder="Enter your monthly subsidy" > Monthly Subsidy</label>
+	<input type="number" class="form-control align-items-lg-end"  @bind=monthlySubsidy />
+	
+	</div>
 
-<div class="mb-3">
-<label class="form-label font-weight-bold"> Choose your index</label>
-<select class="form-select" @bind="chosenIndex"> 
-			@foreach(var index in Enum.GetValues<MarketIndex>())
-			{
+	<div class="mb-3">
+		<label class="form-label font-weight-bold"> Choose your index</label>
+		<select class="form-select" @bind="chosenIndex">
+			@foreach (var index in Enum.GetValues<MarketIndex>())
+			{	
+
 				<option value="@index">@index</option>
 			}
-			
-			
 		</select>
-</div>
 
-
-
+			@if (chosenIndex == MarketIndex.Custom)
+			{
+				<div class="container my-3">
+				<label class="form-label font-weight-bold"> Enter your annual return</label>
+					<input type="number" class="form-control" @bind=customRate/>
+				</div>
+			}
 	</div>
 
 
 
-	@code{
-		
-		private decimal? initialAmount;
-		private decimal? period;
-		private int? monthlySubsidy;
-		private MarketIndex? chosenIndex;
-	}
+
+</div>
+
+
+
+@code {
+
+
+	private decimal? initialAmount;
+	private decimal? period;
+	private int? monthlySubsidy;
+	private MarketIndex? chosenIndex;
+	private decimal? customRate;
+}
