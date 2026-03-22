@@ -51,6 +51,13 @@
 
 		
 	</div>
+	<div class="col form-switch">
+		
+		<input class="form-check-input" type="checkbox" id=tax @bind=includeTax />
+		<label class="form-label font-weight-bold ms-1" >Substract 19% tax from the profit </label>
+	</div>
+
+	<button class="btn-success btn-lg w-100" @onclick=Calculate>Calculate</button> 
 
 
 
@@ -61,13 +68,14 @@
 
 @code {
 
-
+	private bool includeTax=false;
 	private decimal? initialAmount;
 	private int period = 1;
 	private decimal? monthlySubsidy;
 	private MarketIndex chosenIndex = MarketIndex.SP500;
 	private decimal? customRate;
 	private decimal indexRate = 0;
+	
 
 	private void Calculate()
 	{
