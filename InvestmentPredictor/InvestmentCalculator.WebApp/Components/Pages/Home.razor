@@ -21,7 +21,7 @@
 	</div>
 
 	<div class="mb-3">
-	<label class="form-label font-weight-bold" placeholder="Enter your monthly subsidy" > Monthly Subsidy</label>
+	<label class="form-label font-weight-bold" > Monthly Subsidy</label>
 	<input type="number" class="form-control align-items-lg-end"  @bind=monthlySubsidy />
 	
 	</div>
@@ -59,6 +59,14 @@
 
 	<button class="btn-success btn-lg w-100" @onclick=Calculate>Calculate</button> 
 
+	@if (finalResult > 0)
+	{
+		<div class="text-lg-center bg-light">
+			<h2>@finalResult.ToString("C")</h2>
+			<h1>@pureProfit</h1>
+		</div>
+	}
+
 
 
 
@@ -72,21 +80,36 @@
 	private decimal? initialAmount;
 	private int period = 1;
 	private decimal? monthlySubsidy;
-	private MarketIndex chosenIndex = MarketIndex.SP500;
+	private MarketIndex? chosenIndex;
 	private decimal? customRate;
 	private decimal indexRate = 0;
-	
+	private decimal finalResult;
+	private decimal pureProfit = 0;
+
 
 	private void Calculate()
 	{
-		var inputParams = new CalculatorParams(chosenIndex, monthlySubsidy.GetValueOrDefault(), initialAmount.GetValueOrDefault(), customRate.GetValueOrDefault(), indexRate, period);
 		if(customRate==null){
-			indexRate = Calc.GetIndexAnnualReturn(chosenIndex);
+			indexRate = Calc.GetIndexAnnualReturn(chosenIndex.GetValueOrDefault());
 		}
 		else
 		{
 			indexRate = customRate.GetValueOrDefault();
 		}
+
+		var inputParams = new CalculatorParams(chosenIndex.GetValueOrDefault(), monthlySubsidy.GetValueOrDefault(), initialAmount.GetValueOrDefault(), customRate.GetValueOrDefault(), indexRate, period);
+
+
+		if (includeTax == false)
+		{
+			finalResult = Calc.CalculatedValue(inputParams);
+		}
+		else
+		{
+			finalResult = Calc.TotalValueAfterTax(inputParams);
+		}
+		//debug
+		//pureProfit = Calc.GetPureReturnValue(inputParams);
 	}
 	
 }
