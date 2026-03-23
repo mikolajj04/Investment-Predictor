@@ -62,8 +62,10 @@
 	@if (finalResult > 0)
 	{
 		<div class="text-lg-center bg-light">
+			<h5>Your value: </h5>
 			<h2>@finalResult.ToString("C")</h2>
-			<h1>@pureProfit</h1>
+			
+			
 		</div>
 	}
 
@@ -80,24 +82,24 @@
 	private decimal? initialAmount;
 	private int period = 1;
 	private decimal? monthlySubsidy;
-	private MarketIndex? chosenIndex;
+	private MarketIndex chosenIndex = MarketIndex.SP500;
 	private decimal? customRate;
 	private decimal indexRate = 0;
 	private decimal finalResult;
-	private decimal pureProfit = 0;
+	//private decimal pureProfit = 0;
 
 
 	private void Calculate()
 	{
 		if(customRate==null){
-			indexRate = Calc.GetIndexAnnualReturn(chosenIndex.GetValueOrDefault());
+			indexRate = Calc.GetIndexAnnualReturn(chosenIndex);
 		}
 		else
 		{
 			indexRate = customRate.GetValueOrDefault();
 		}
 
-		var inputParams = new CalculatorParams(chosenIndex.GetValueOrDefault(), monthlySubsidy.GetValueOrDefault(), initialAmount.GetValueOrDefault(), customRate.GetValueOrDefault(), indexRate, period);
+		var inputParams = new CalculatorParams(chosenIndex, monthlySubsidy.GetValueOrDefault(), initialAmount.GetValueOrDefault(), customRate.GetValueOrDefault(), indexRate, period);
 
 
 		if (includeTax == false)
