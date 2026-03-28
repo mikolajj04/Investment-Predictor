@@ -61,11 +61,14 @@
 
 	@if (finalResult > 0)
 	{
-		<div class="d-flex bg-light justify-content-center align-content-center card border-2 p-1 my-2">
-			<div class="d-flex flex-column justify-content-center align-content-center text-center">
-			<div class="h6 text-center mt-2" > Value of your investment: </div>
+		<div class="d-flex bg-light text-center card border-2 p-1 my-2">
+			<div class="d-flex flex-column">
+			<div class="h6  mt-2" > Value of your investment: </div>
 				<div class="h1 font-weight-bold"> @finalResult.ToString("C") </div>
-			<div class="h6 text-center mt-2"> Pure Profit: </div>
+				@if (shouldShowTax==true){
+				<div class="h6 mt-1 mb-3 alert-danger">(Tax value: @taxValue.ToString("C"))</div>}
+				</div>					
+				<div class="h6 mt-2"> Pure Profit: 
 				<div class="h1 font-weight-bold"> @pureProfit.ToString("C") </div>
 			</div>
 			</div>
@@ -90,7 +93,9 @@
 	private decimal indexRate = 0;
 	private decimal finalResult;
 	private decimal pureProfit;
-	//private decimal pureProfit = 0;
+	private decimal taxValue;
+	private bool shouldShowTax;
+
 
 
 	private void Calculate()
@@ -109,13 +114,16 @@
 		if (includeTax == false)
 		{
 			finalResult = Calc.CalculatedValue(inputParams);
+			shouldShowTax = false;
 		}
 		else
 		{
 			finalResult = Calc.TotalValueAfterTax(inputParams);
+			shouldShowTax = true;
 		}
-		
+
 		pureProfit = Calc.GetPureReturnValue(inputParams);
+		taxValue = Calc.CalculateTaxValue(inputParams);
 	}
 	
 }
