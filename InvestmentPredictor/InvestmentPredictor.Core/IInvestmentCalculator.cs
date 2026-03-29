@@ -13,7 +13,7 @@ namespace InvestmentPredictor
          MarketIndex chosenIndex,
         [Range(0, 1000000000)] decimal monthlySubsidy,
         [Range(0, 1000000000)] decimal initialAmount,
-        [Range(0, 100)] decimal customAnnualReturn,
+        [Range(0, 100)] decimal? customAnnualReturn,
         [property: JsonIgnore] decimal annualReturn,
         [Range(1,200)] int period);
     public interface IInvestmentCalculator

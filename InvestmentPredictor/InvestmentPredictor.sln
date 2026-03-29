@@ -3,15 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvestmentPredictor", "InvestmentPredictor\InvestmentPredictor.csproj", "{44E64ABF-A2C8-4DE8-A70C-57DED07D321B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvestmentPredictor.Console", "InvestmentPredictor.Console\InvestmentPredictor.Console.csproj", "{44E64ABF-A2C8-4DE8-A70C-57DED07D321B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvestmentPredictor.Core", "InvestmentPredictor.Core\InvestmentPredictor.Core.csproj", "{8984C796-6DAB-49FC-91C8-73F11DAB9499}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvestmentPredictor.api", "InvestmentPredictor.api\InvestmentPredictor.api.csproj", "{CA1AF64B-392B-3D94-71D5-19561C468CFA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvestmentPredictor.WebApp", "InvestmentPredictor.WebApp\InvestmentPredictor.WebApp\InvestmentPredictor.WebApp\InvestmentPredictor.WebApp.csproj", "{B32B9B0F-D587-C42D-9570-6EF07AB3DC5B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvestmentPredictor.WebApp.Client", "InvestmentPredictor.WebApp\InvestmentPredictor.WebApp\InvestmentPredictor.WebApp.Client\InvestmentPredictor.WebApp.Client.csproj", "{118E026E-A6E0-A388-3B13-D1D3206F1A49}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvestmentCalculator.WebApp", "InvestmentCalculator.WebApp\InvestmentCalculator.WebApp.csproj", "{797FC26E-3001-A702-50C9-0DB047C52D3D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,14 +29,10 @@ Global
 		{CA1AF64B-392B-3D94-71D5-19561C468CFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CA1AF64B-392B-3D94-71D5-19561C468CFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CA1AF64B-392B-3D94-71D5-19561C468CFA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B32B9B0F-D587-C42D-9570-6EF07AB3DC5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B32B9B0F-D587-C42D-9570-6EF07AB3DC5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B32B9B0F-D587-C42D-9570-6EF07AB3DC5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B32B9B0F-D587-C42D-9570-6EF07AB3DC5B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{118E026E-A6E0-A388-3B13-D1D3206F1A49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{118E026E-A6E0-A388-3B13-D1D3206F1A49}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{118E026E-A6E0-A388-3B13-D1D3206F1A49}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{118E026E-A6E0-A388-3B13-D1D3206F1A49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{797FC26E-3001-A702-50C9-0DB047C52D3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{797FC26E-3001-A702-50C9-0DB047C52D3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{797FC26E-3001-A702-50C9-0DB047C52D3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{797FC26E-3001-A702-50C9-0DB047C52D3D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
