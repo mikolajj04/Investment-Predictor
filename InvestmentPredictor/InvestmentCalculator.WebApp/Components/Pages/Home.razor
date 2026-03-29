@@ -6,7 +6,7 @@
 
 <div class="container-md card shadow mt-2">
 
-	<div class="bg-light mb-5 rounded-pill  text-center fw-bolder font-weight-bold">
+	<div class="bg-light mb-5  text-center fw-bolder font-weight-bold card border-2 p-1 my-2">
 		<h1>Investment predictor</h1>
 	</div>
 
@@ -58,8 +58,15 @@
 	</div>
 
 	<button class="btn-success btn-lg w-100" @onclick=Calculate>Calculate</button> 
+	@if (ErrorMessage != null)
+	{
+		<div class="d-flex bg-light text-center card border-2 p-1 my-2">
+			@ErrorMessage
 
-	@if (finalResult > 0)
+		</div>
+	}
+
+	@if (finalResult > 0 && ErrorMessage==null)
 	{
 		<div class="d-flex bg-light text-center card border-2 p-1 my-2">
 			<div class="d-flex flex-column">
@@ -69,7 +76,7 @@
 				<div class="h6 mt-1 mb-3 text-danger">(Tax value: @taxValue.ToString("C"))</div>}
 				</div>					
 				<div class="h6 mt-2"> Pure Profit: 
-				<div class="h1 font-weight-bold"> @pureProfit.ToString("C") </div>
+				<div class="h2 font-weight-bold"> @pureProfit.ToString("C") </div>
 			</div>
 			</div>
 		
@@ -95,11 +102,18 @@
 	private decimal pureProfit;
 	private decimal taxValue;
 	private bool shouldShowTax;
+	private string? ErrorMessage=null;
 
 
 
 	private void Calculate()
 	{
+
+		if (monthlySubsidy < 0|| period<=0 || initialAmount<0 || (chosenIndex==MarketIndex.Custom)&&customRate < 0)
+		{
+			ErrorMessage = "Set proper parimeters!";
+			
+		}
 		if(customRate==null){
 			indexRate = Calc.GetIndexAnnualReturn(chosenIndex);
 		}
