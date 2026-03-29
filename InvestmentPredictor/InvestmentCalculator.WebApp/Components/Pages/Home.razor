@@ -57,10 +57,10 @@
 		<label class="form-label font-weight-bold ms-1" >Substract 19% tax from the profit </label>
 	</div>
 
-	<button class="btn-success btn-lg w-100" @onclick=Calculate>Calculate</button> 
+	<button class="btn-success btn-lg w-100 mb-2" @onclick=Calculate>Calculate</button> 
 	@if (ErrorMessage != null)
 	{
-		<div class="d-flex bg-light text-center card border-2 p-1 my-2">
+		<div class="d-flex bg-light text-center card border-2 p-1 my-2 text-danger alert-danger">
 			@ErrorMessage
 
 		</div>
@@ -92,6 +92,8 @@
 @code {
 
 	private bool includeTax=false;
+	private bool shouldShowTax = false;
+	// private bool includeInflation = false; TO BE ADDED
 	private decimal? initialAmount;
 	private int period = 1;
 	private decimal? monthlySubsidy;
@@ -101,7 +103,6 @@
 	private decimal finalResult;
 	private decimal pureProfit;
 	private decimal taxValue;
-	private bool shouldShowTax;
 	private string? ErrorMessage=null;
 
 
@@ -112,7 +113,11 @@
 		if (monthlySubsidy < 0|| period<=0 || initialAmount<0 || (chosenIndex==MarketIndex.Custom)&&customRate < 0)
 		{
 			ErrorMessage = "Set proper parimeters!";
-			
+
+		}
+		else
+		{
+			ErrorMessage = null;
 		}
 		if(customRate==null){
 			indexRate = Calc.GetIndexAnnualReturn(chosenIndex);
