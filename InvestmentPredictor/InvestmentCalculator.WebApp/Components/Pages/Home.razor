@@ -12,7 +12,7 @@
 
 	<div class="mb-3">
 	<label class="form-label font-weight-bold"> Initial Investment	</label>
-	<input type="number" class="form-control" @bind=initialAmount />
+	<input type="number" class="form-control" placeholder="0.00" @bind=initialAmount />
 	</div>
 
 	<div class="mb-3">
@@ -22,7 +22,7 @@
 
 	<div class="mb-3">
 	<label class="form-label font-weight-bold" > Monthly Subsidy</label>
-	<input type="number" class="form-control align-items-lg-end"  @bind=monthlySubsidy />
+	<input type="number" class="form-control align-items-lg-end" placeholder="0.00"  @bind=monthlySubsidy />
 	
 	</div>
 
@@ -66,7 +66,7 @@
 			<div class="h6  mt-2" > Value of your investment: </div>
 				<div class="h1 font-weight-bold"> @finalResult.ToString("C") </div>
 				@if (shouldShowTax==true){
-				<div class="h6 mt-1 mb-3 alert-danger">(Tax value: @taxValue.ToString("C"))</div>}
+				<div class="h6 mt-1 mb-3 text-danger">(Tax value: @taxValue.ToString("C"))</div>}
 				</div>					
 				<div class="h6 mt-2"> Pure Profit: 
 				<div class="h1 font-weight-bold"> @pureProfit.ToString("C") </div>
