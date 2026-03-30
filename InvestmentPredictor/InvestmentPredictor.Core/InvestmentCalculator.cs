@@ -57,6 +57,25 @@
         public decimal TotalValueAfterTax(CalculatorParams p) {
             return CalculatedValue(p) - CalculateTaxValue(p);
         }
+
+        public List<decimal> GetYearlyProjection(CalculatorParams p) {
+            decimal currentValue = p.initialAmount;
+            List<decimal> currentValueList = new List<decimal>();
+            currentValueList.Add(currentValue);
+            for (int year = 1; year <= p.period; year++)
+            {
+                for (int month = 1; month <= 12; month++)
+                {
+                    currentValue += p.monthlySubsidy;
+                    currentValue += currentValue * p.annualReturn / 100 / 12;
+                }
+                Math.Round(currentValue, 2);
+                currentValueList.Add(currentValue);
+
+            }
+
+
+            return currentValueList; }
         
 
 
