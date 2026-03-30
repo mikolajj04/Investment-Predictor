@@ -25,6 +25,7 @@ namespace InvestmentPredictor.Api.Controllers
 
             var finalParams = p with { annualReturn = rate };
 
+
             return Ok(new
             {
                 UsedRate = rate,

@@ -25,5 +25,7 @@ namespace InvestmentPredictor
 
         decimal CalculateTaxValue(CalculatorParams p);
         decimal TotalValueAfterTax(CalculatorParams p);
+
+        List<decimal> GetYearlyProjection(CalculatorParams p);
     }
 }
