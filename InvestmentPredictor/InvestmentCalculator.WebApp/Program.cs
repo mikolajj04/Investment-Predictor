@@ -1,3 +1,4 @@
+using ApexCharts;
 using InvestmentCalculator.WebApp.Components;
 using InvestmentPredictor;
 
@@ -13,6 +14,7 @@ namespace InvestmentPredictor
             // Add services to the container.
             builder.Services.AddRazorComponents()
                 .AddInteractiveServerComponents();
+            builder.Services.AddApexCharts();
             builder.Services.AddScoped<IInvestmentCalculator, InvestmentCalculator>();
 
             var app = builder.Build();

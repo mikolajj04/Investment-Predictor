@@ -79,8 +79,23 @@
 				<div class="h2 font-weight-bold"> @pureProfit.ToString("C") </div>
 			</div>
 			</div>
+		@if (chartDatas.Any())
+		{
+			<div class="card shadow-sm mt-4 p-3">
+				<ApexChart @ref="myChart" TItem="ChartData" Title="Investment Growth Over Time">
+					<ApexPointSeries TItem="ChartData"
+									 Items="chartDatas"
+									 Name="Portfolio Value"
+									 SeriesType="SeriesType.Area"
+									 XValue="@(e => e.Year)"
+									 YValue="@(e => e.Value)"
+									 Stroke="@(new SeriesStroke { Color = "#28a745", Width = 3 })" />
+				</ApexChart>
+			</div>
+		}
 		
 	}
+	
 
 
 
@@ -91,6 +106,7 @@
 
 @code {
 
+	private ApexChart<ChartData>? myChart;
 	private bool includeTax=false;
 	private bool shouldShowTax = false;
 	// private bool includeInflation = false; TO BE ADDED
@@ -104,11 +120,13 @@
 	private decimal pureProfit;
 	private decimal taxValue;
 	private string? ErrorMessage=null;
+	private List<ChartData>? chartDatas;
 
 
 
-	private void Calculate()
+	private async Task Calculate()
 	{
+
 
 		if (monthlySubsidy < 0|| period<=0 || initialAmount<0 || (chosenIndex==MarketIndex.Custom)&&customRate < 0)
 		{
@@ -141,8 +159,33 @@
 			shouldShowTax = true;
 		}
 
+		chartDatas = new List<ChartData>();
+		var valueProjection = Calc.GetYearlyProjection(inputParams);
+		for(int year=0; year<=period; year++)
+		{
+			var point = new ChartData
+			{
+				Year=year,
+				Value=Math.Round(valueProjection[year],2)
+			};
+
+			chartDatas.Add(point);
+		}
+
+
 		pureProfit = Calc.GetPureReturnValue(inputParams);
 		taxValue = Calc.CalculateTaxValue(inputParams);
+		if (myChart != null)
+		{
+			await myChart.UpdateSeriesAsync(true);
+		}
+
 	}
-	
+
+	public class ChartData
+	{
+		public int Year { get; set; }
+		public decimal Value { get; set; }
+	}
+
 }
