@@ -163,13 +163,31 @@
 		var valueProjection = Calc.GetYearlyProjection(inputParams);
 		for(int year=0; year<=period; year++)
 		{
-			var point = new ChartData
-			{
-				Year=year,
-				Value=Math.Round(valueProjection[year],2)
-			};
 
-			chartDatas.Add(point);
+			if(year==period && includeTax==true){
+				
+				var point = new ChartData
+				{
+
+					Year = year,
+					Value =Math.Round(Calc.TotalValueAfterTax(inputParams), 2)
+				};
+				chartDatas.Add(point);
+			}
+			else
+			{
+				var point = new ChartData
+				{
+
+					Year = year,
+					Value = Math.Round(valueProjection[year], 2)
+				};
+				chartDatas.Add(point);
+
+			}
+
+
+			
 		}
 
 
