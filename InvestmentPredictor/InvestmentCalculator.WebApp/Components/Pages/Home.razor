@@ -10,23 +10,23 @@
 		<h1>Investment predictor</h1>
 	</div>
 
-	<div class="mb-3">
+	<div class="mb-3 p-2">
 	<label class="form-label font-weight-bold"> Initial Investment	</label>
 	<input type="number" class="form-control" placeholder="0.00" @bind=initialAmount />
 	</div>
 
-	<div class="mb-3">
+	<div class="mb-3  p-2">
 	<label class="form-label font-weight-bold"> Period</label>
 	<input type="number" class="form-control" @bind=period />
 	</div>
 
-	<div class="mb-3">
+	<div class="mb-3  p-2">
 	<label class="form-label font-weight-bold" > Monthly Subsidy</label>
 	<input type="number" class="form-control align-items-lg-end" placeholder="0.00"  @bind=monthlySubsidy />
 	
 	</div>
 
-	<div class="mb-3">
+	<div class="mb-3  p-2">
 		<label class="form-label font-weight-bold"> Choose your index</label>
 		<select class="form-select" @bind="chosenIndex">
 			@foreach (var index in Enum.GetValues<MarketIndex>())
@@ -51,13 +51,13 @@
 
 		
 	</div>
-	<div class="col form-switch">
+	<div class="col form-switch  ps-5 ">
 		
-		<input class="form-check-input" type="checkbox" id=tax @bind=includeTax />
+		<input class="form-check-input " type="checkbox" id=tax @bind=includeTax />
 		<label class="form-label font-weight-bold ms-1" >Substract 19% tax from the profit </label>
 	</div>
 
-	<button class="btn-success btn-lg w-100 mb-2" @onclick=Calculate><i class="bi bi-calculator mx-2"></i>Calculate</button>
+	<button class="btn-success btn-lg w-100 mb-2 mt-1" @onclick=Calculate><i class="bi bi-calculator mx-2"></i>Calculate</button>
 	
 	@if (ErrorMessage != null)
 	{
@@ -93,6 +93,8 @@
 									 XValue="@(e => e.Year)"
 									 YValue="@(e => e.Value)"
 									 Stroke="@(new SeriesStroke { Color = "#28a745", Width = 3 })" />
+					
+
 				</ApexChart>
 			</div>
 		}
