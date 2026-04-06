@@ -1,6 +1,7 @@
 ﻿@page "/"
 @using InvestmentPredictor
 @inject IInvestmentCalculator Calc
+@inject IJSRuntime JSRuntime
 
 <PageTitle>Investment Calculator</PageTitle>
 
@@ -73,7 +74,7 @@
 	{
 		<div class="d-flex bg-light text-center card border-2 p-1 my-2">
 			<div class="d-flex flex-column">
-			<div class="h6  mt-2" > Value of your investment: </div>
+			<div class="h6  mt-2" id="result-section"> Value of your investment: </div>
 				<div class="h1 font-weight-bold"> @finalResult.ToString("C") </div>
 				@if (shouldShowTax==true){
 				<div class="h6 mt-1 mb-3 text-danger">(Tax value: @taxValue.ToString("C"))</div>}
@@ -84,8 +85,9 @@
 			</div>
 		@if (chartDatas.Any())
 		{
-			<div class="card shadow-sm mt-4 p-3">
-				<ApexChart @ref="myChart" TItem="ChartData" Title="Investment Growth Over Time">
+			<div class="card shadow-sm mt-4 p-3 mb-2">
+				<h5 class="text-center mt-2 mb-1 text-muted">Investment Growth</h5>
+				<ApexChart @ref="myChart" TItem="ChartData" Title="">
 					<ApexPointSeries TItem="ChartData"
 									 Items="chartDatas"
 									 Name="Portfolio Value"
@@ -94,7 +96,7 @@
 									 YValue="@(e => e.Value)"
 									 Stroke="@(new SeriesStroke { Color = "#28a745", Width = 3 })" />
 					
-
+					
 				</ApexChart>
 			</div>
 		}
@@ -178,19 +180,19 @@
 			}
 
 
-				var point = new ChartData
+			var point = new ChartData
 			 	{ 
 
 			 		Year = year,
 					Value = Math.Round( value, 2)
 			 	};
 
-			 	chartDatas.Add(point);
-
-			
+			chartDatas.Add(point);
 
 
-			
+
+
+
 		}
 
 
@@ -200,7 +202,8 @@
 		{
 			await myChart.UpdateSeriesAsync(true);
 		}
-
+		await Task.Delay(100);
+		await JSRuntime.InvokeVoidAsync("scrollToElement", "result-section");
 	}
 
 	public class ChartData

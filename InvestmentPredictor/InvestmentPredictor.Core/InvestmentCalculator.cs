@@ -37,10 +37,10 @@
         {
             decimal calculatedValue = CalculatedValue(p);
 
-            decimal sumOfSubsidy = p.initialAmount + (p.monthlySubsidy * 12 * p.period);
+            decimal totalInvested = p.initialAmount + (p.monthlySubsidy * 12 * p.period);
 
 
-            return calculatedValue-sumOfSubsidy;
+            return calculatedValue-totalInvested;
 
 
 
