@@ -34,7 +34,13 @@ namespace InvestmentPredictor
 
             app.MapRazorComponents<App>()
                 .AddInteractiveServerRenderMode();
+            var supportedCultures = new[] { "pl-PL" };
+            var localizationOptions = new RequestLocalizationOptions()
+                .SetDefaultCulture(supportedCultures[0])
+                .AddSupportedCultures(supportedCultures)
+                .AddSupportedUICultures(supportedCultures);
 
+            app.UseRequestLocalization(localizationOptions);
             app.Run();
         }
     }
