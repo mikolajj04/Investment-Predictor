@@ -91,15 +91,16 @@
 
 @media (min-width: 641px) {
     .navbar-toggler {
-        display: none;
+        display: block;
     }
 
     .nav-scrollable {
         /* Never collapse the sidebar for wide screens */
-        display: block;
+        display: none;
 
         /* Allow sidebar to scroll for tall menus */
-        height: calc(100vh - 3.5rem);
+        height: auto !important;
+        max-height: 400px;
         overflow-y: auto;
     }
 }
