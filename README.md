@@ -1,8 +1,8 @@
-# 📈 MJ Invest Calc - Investment Predictor
+# MJ Invest Calc - Investment Predictor
 
-A professional investment calculator built with **.NET 8 Blazor**, designed to simulate capital growth while accounting for inflation, capital gains tax (Belka tax), and historical market index returns.
+A professional investment calculator built with **.NET 8 Blazor**, designed to simulate capital growth while accounting for capital gains tax (Belka tax) and historical market index returns.
 
-🚀 **Live Application:** [mj-invest-calc.azurewebsites.net](https://mj-invest-calc.azurewebsites.net)
+ **Live Application:** [mj-invest-calc.azurewebsites.net](https://mj-invest-calc.azurewebsites.net)
 
 ---
 
@@ -21,9 +21,11 @@ A professional investment calculator built with **.NET 8 Blazor**, designed to s
 - [ ] **AI Investment News (Upcoming):** Market insights aggregator powered by AI (OpenAI API).
 
 ## 🏗️ Project Structure
-The project follows **Clean Architecture** principles to ensure scalability:
+The project follows **Clean Architecture** principles to ensure scalability.
 * **[InvestmentPredictor.Core:](./InvestmentPredictor/InvestmentPredictor.Core)** A Class Library containing all mathematical logic, financial formulas, and data models.
 * **[InvestmentPredictor.WebApp:](./InvestmentPredictor/InvestmentCalculator.WebApp)** The Blazor presentation layer, handling the user interface and cloud integration.
+* **[InvestmentPredictor.Console (Legacy/Testing):](./InvestmentPredictor/InvestmentPredictor.Console)** The initial version of the project. Currently used as a sandbox for rapid testing of new financial algorithms.
+* **[InvestmentPredictor.api (Experimental):](InvestmentPredictor/InvestmentPredictor.api)** A REST API layer designed to potentially serve data to other clients (e.g., mobile apps) in the future.
 
 ## ⚙️ Local Setup
 1. Clone the repository: `git clone https://github.com/mikolajj04/InvestmentPredictor.git`
