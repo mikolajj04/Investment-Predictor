@@ -35,6 +35,6 @@ The project follows **Clean Architecture** principles to ensure scalability.
 
 ---
 
-## 👤 Author
+## Author
 **Mikołaj Jussak**
 *Computer Science Student at Silesian University of Technology*
