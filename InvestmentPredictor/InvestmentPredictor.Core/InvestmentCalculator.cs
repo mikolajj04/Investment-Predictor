@@ -4,15 +4,18 @@
     {
         public decimal GetIndexAnnualReturn(MarketIndex index) => index switch
         {
-            // Avg annual return (last 30 years)
+            // Avg annual return (aprox. last 20 years)
             MarketIndex.SP500 => 10.4m,
             MarketIndex.Nasdaq100 => 14.4m,
-            MarketIndex.WIG20 => 5.2m,
-            MarketIndex.Gold => 7.5m,
-            MarketIndex.MSCIWorld => 8.9m,
-            MarketIndex.Russell2000=> 8.2m,
-            MarketIndex.MSCIEmergingMarkets => 5.9m,
-            MarketIndex.DowJones => 7.4m,
+            MarketIndex.WIG20 => 4.8m,
+            MarketIndex.Gold => 10.7m,
+            MarketIndex.Silver => 10.0m,
+            MarketIndex.MSCIWorld => 8.5m,
+            MarketIndex.Russell2000=> 8.0m,
+            MarketIndex.MSCIEmergingMarkets => 6.5m,
+            MarketIndex.DowJones => 10.2m,
+            MarketIndex.DAX => 6.5m,
+            MarketIndex.Nikkei225 => 6.1m,
             _ => 0m
 
 
