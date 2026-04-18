@@ -28,6 +28,13 @@ The project follows **Clean Architecture** principles to ensure scalability.
 * **[InvestmentPredictor.Console (Legacy/Testing):](./InvestmentPredictor/InvestmentPredictor.Console)** The initial version of the project. Currently used as a sandbox for rapid testing of new financial algorithms.
 * **[InvestmentPredictor.api (Experimental):](InvestmentPredictor/InvestmentPredictor.api)** A REST API layer designed to potentially serve data to other clients (e.g., mobile apps) in the future.
 
+## 📊 Calculation Methodology
+* **Historical Data Benchmarking:** When selecting a market index (e.g., S&P 500), the system utilizes a 20-year historical average return (where applicable). This provides a smoothed, long-term perspective on market performance, filtering out short-term volatility.
+* **Postnumerando Model:** The calculation engine follows the Postnumerando (Ordinary Annuity) convention.
+    * Monthly subsidies are added at the end of each period.
+    * Interest is compounded on the existing balance before the new monthly contribution is added.
+    * This approach provides a more conservative and realistic growth simulation compared to the prenumerando (start-of-period) model.
+
 ## ⚙️ Local Setup
 1. Clone the repository: `git clone https://github.com/mikolajj04/InvestmentPredictor.git`
 2. Open the `.sln` file in Visual Studio 2022.

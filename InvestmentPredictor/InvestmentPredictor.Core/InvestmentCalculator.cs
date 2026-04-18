@@ -4,7 +4,7 @@
     {
         public decimal GetIndexAnnualReturn(MarketIndex index) => index switch
         {
-            // Avg annual return (aprox. last 20 years)
+        // Avg annual return (aprox. last 20 years if applicable)
             MarketIndex.SP500 => 10.4m,
             MarketIndex.Nasdaq100 => 14.4m,
             MarketIndex.WIG20 => 4.8m,
