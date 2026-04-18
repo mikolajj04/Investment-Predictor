@@ -30,7 +30,7 @@ namespace InvestmentPredictor.Api.Controllers
             {
                 UsedRate = rate,
 
-                TotalValue = _calculator.CalculatedValue(finalParams),
+                TotalValue = _calculator.CalculateTotalValue(finalParams),
                 PureProfit = _calculator.GetPureReturnValue(finalParams),
                 TaxValue = _calculator.CalculateTaxValue(finalParams),
                 TotalNet = _calculator.TotalValueAfterTax(finalParams)

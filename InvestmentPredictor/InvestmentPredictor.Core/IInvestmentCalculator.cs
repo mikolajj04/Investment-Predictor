@@ -19,7 +19,7 @@ namespace InvestmentPredictor
     public interface IInvestmentCalculator
     {
         decimal GetIndexAnnualReturn(MarketIndex index);
-        decimal CalculatedValue(CalculatorParams p);
+        decimal CalculateTotalValue(CalculatorParams p);
 
         decimal GetPureReturnValue(CalculatorParams p);
 

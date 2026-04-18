@@ -14,7 +14,7 @@ namespace InvestmentPredictor
             int period = ui.ReadInt("How long do you want to invest? (years): ");
             decimal monthlySubsidy = ui.ReadDecimal("How much do you want to subsidize monthly?: ");
             var calculatorParams=new CalculatorParams(index ,monthlySubsidy, initialAmount,0, annualReturn, period);
-            decimal calculatedValue = calculator.CalculatedValue(calculatorParams);
+            decimal calculatedValue = calculator.CalculateTotalValue(calculatorParams);
             decimal pureReturn = calculator.GetPureReturnValue(calculatorParams);
             decimal finalNetValue = calculator.TotalValueAfterTax(calculatorParams);
             Console.WriteLine($"Total value after {period} years: {calculatedValue:C}");

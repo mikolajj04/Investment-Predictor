@@ -20,15 +20,20 @@
 
 
         };
-       public decimal CalculatedValue(CalculatorParams p)
+       public decimal CalculateTotalValue(CalculatorParams p)
         {
             decimal calculatedValue = p.initialAmount;
+            var monthlyRate = p.annualReturn / 100 / 12;
+
             for (int year = 1; year <= p.period; year++)
             {
+
+                
+
                 for (int month = 1; month <= 12; month++)
                 {
+                    calculatedValue += calculatedValue * monthlyRate;
                     calculatedValue += p.monthlySubsidy;
-                    calculatedValue += calculatedValue * p.annualReturn / 100 / 12;
                 }
 
 
@@ -38,7 +43,7 @@
 
       public  decimal GetPureReturnValue(CalculatorParams p)
         {
-            decimal calculatedValue = CalculatedValue(p);
+            decimal calculatedValue = CalculateTotalValue(p);
 
             decimal totalInvested = p.initialAmount + (p.monthlySubsidy * 12 * p.period);
 
@@ -58,26 +63,31 @@
         }
 
         public decimal TotalValueAfterTax(CalculatorParams p) {
-            return CalculatedValue(p) - CalculateTaxValue(p);
+            return CalculateTotalValue(p) - CalculateTaxValue(p);
         }
-
+         
         public List<decimal> GetYearlyProjection(CalculatorParams p) {
             decimal currentValue = p.initialAmount;
             List<decimal> currentValueList = new List<decimal>();
             currentValueList.Add(currentValue);
+            var monthlyRate = p.annualReturn / 100 / 12;
             for (int year = 1; year <= p.period; year++)
             {
+
+
                 for (int month = 1; month <= 12; month++)
                 {
+                    currentValue += currentValue * monthlyRate;
                     currentValue += p.monthlySubsidy;
-                    currentValue += currentValue * p.annualReturn / 100 / 12;
                 }
-                Math.Round(currentValue, 2);
+                
+                
+                
                 currentValueList.Add(currentValue);
 
             }
 
-
+            
             return currentValueList; }
         
 
