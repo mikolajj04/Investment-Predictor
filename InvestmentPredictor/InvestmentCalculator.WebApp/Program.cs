@@ -5,6 +5,7 @@ using InvestmentPredictor;
 
 namespace InvestmentPredictor
 {
+    
     public class Program
     {
         public static void Main(string[] args)

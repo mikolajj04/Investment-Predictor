@@ -157,7 +157,7 @@
 
 		if (includeTax == false)
 		{
-			finalResult = Calc.CalculatedValue(inputParams);
+			finalResult = Calc.CalculateTotalValue(inputParams);
 			shouldShowTax = false;
 		}
 		else
@@ -185,6 +185,8 @@
 
 			 		Year = year,
 					Value = Math.Round( value, 2)
+					
+					
 			 	};
 
 			chartDatas.Add(point);
