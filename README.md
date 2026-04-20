@@ -47,4 +47,4 @@ The project follows **Clean Architecture** principles to ensure scalability.
 **Mikołaj Jussak**
 *Computer Science Student at Silesian University of Technology*
 ## ⚖️ License
-Distributed under the **MIT License**. See `LICENSE` for more information.
+Distributed under the **MIT License**. See [`LICENSE`](./LICENSE) for more information.
