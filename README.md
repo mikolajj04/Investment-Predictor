@@ -11,7 +11,7 @@ A professional investment calculator built with **.NET 8 Blazor**, designed to s
 ---
 
 ## 🛠️ Tech Stack
-* **Framework:** C# .NET 8 (Blazor Web App)\
+* **Framework:** C# .NET 8 (Blazor Web App)
 * **Render Mode:** Interactive Server (Real-time UI updates via SignalR)
 * **UI/UX:** Bootstrap 5 (Responsive Design / Mobile-First)
 * **Charting:** ApexCharts.Blazor
