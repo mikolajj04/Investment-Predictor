@@ -1,4 +1,8 @@
 # MJ Invest Calc - Investment Predictor
+![.NET Version](https://img.shields.io/badge/.NET-8.0-512bd4?style=flat&logo=dotnet)
+![License](https://img.shields.io/badge/license-MIT-green?style=flat)
+![Azure](https://img.shields.io/badge/Azure-Deployed-0089D6?style=flat&logo=microsoftazure)
+![Status](https://img.shields.io/badge/Status-Active-success)
 
 A professional investment calculator built with **.NET 8 Blazor**, designed to simulate capital growth while accounting for capital gains tax (Belka tax) and historical market index returns.
 
@@ -7,7 +11,7 @@ A professional investment calculator built with **.NET 8 Blazor**, designed to s
 ---
 
 ## 🛠️ Tech Stack
-* **Framework:** C# .NET 8 (Blazor Web App)\
+* **Framework:** C# .NET 8 (Blazor Web App)
 * **Render Mode:** Interactive Server (Real-time UI updates via SignalR)
 * **UI/UX:** Bootstrap 5 (Responsive Design / Mobile-First)
 * **Charting:** ApexCharts.Blazor
@@ -46,3 +50,5 @@ The project follows **Clean Architecture** principles to ensure scalability.
 ## Author
 **Mikołaj Jussak**
 *Computer Science Student at Silesian University of Technology*
+## ⚖️ License
+Distributed under the **MIT License**. See [`LICENSE`](./LICENSE) for more information.
