@@ -2,6 +2,18 @@
 {
     public class InvestmentCalculator : IInvestmentCalculator
     {
+
+        private void ValidateParams(CalculatorParams p)
+        {
+            if (p == null) throw new ArgumentNullException(nameof(p));
+            if (p.initialAmount < 0) throw new ArgumentOutOfRangeException(nameof(p.initialAmount), "Initial amount cannot be negative.");
+            if (p.monthlySubsidy < 0) throw new ArgumentOutOfRangeException(nameof(p.monthlySubsidy), "Monthly subsidy cannot be negative");
+            if (p.period <= 0) throw new ArgumentOutOfRangeException(nameof(p.period), "Period must be greater than zero.");
+            if (p.annualReturn < 0) throw new ArgumentOutOfRangeException(nameof(p.annualReturn), "Annual return cannot be negative.");
+           
+        }
+
+
         public decimal GetIndexAnnualReturn(MarketIndex index) => index switch
         {
         // Avg annual return (aprox. last 20 years if applicable)
@@ -22,6 +34,7 @@
         };
        public decimal CalculateTotalValue(CalculatorParams p)
         {
+            ValidateParams(p);
             decimal calculatedValue = p.initialAmount;
             var monthlyRate = p.annualReturn / 100 / 12;
 
@@ -43,6 +56,7 @@
 
       public  decimal GetPureReturnValue(CalculatorParams p)
         {
+            
             decimal calculatedValue = CalculateTotalValue(p);
 
             decimal totalInvested = p.initialAmount + (p.monthlySubsidy * 12 * p.period);
@@ -56,6 +70,7 @@
 
         public decimal CalculateTaxValue(CalculatorParams p)
         {
+            
             const decimal taxRate= 0.19m;
             decimal pureProfit= GetPureReturnValue(p); ;
             return pureProfit * taxRate;
@@ -63,10 +78,12 @@
         }
 
         public decimal TotalValueAfterTax(CalculatorParams p) {
+           
             return CalculateTotalValue(p) - CalculateTaxValue(p);
         }
          
         public List<decimal> GetYearlyProjection(CalculatorParams p) {
+                ValidateParams(p);
             decimal currentValue = p.initialAmount;
             List<decimal> currentValueList = new List<decimal>();
             currentValueList.Add(currentValue);
