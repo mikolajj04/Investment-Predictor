@@ -127,7 +127,7 @@
 	private decimal pureProfit;
 	private decimal taxValue;
 	private string? ErrorMessage=null;
-	private List<ChartData>? chartDatas;
+	private List<ChartData> chartDatas = new List<ChartData>();
 
 
 
@@ -138,7 +138,7 @@
 		if (monthlySubsidy < 0|| period<=0 || initialAmount<0 || (chosenIndex==MarketIndex.Custom)&&customRate < 0)
 		{
 			ErrorMessage = "Set proper parimeters!";
-
+			return;
 		}
 		else
 		{
