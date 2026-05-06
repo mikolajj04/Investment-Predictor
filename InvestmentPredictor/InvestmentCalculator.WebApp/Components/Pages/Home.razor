@@ -135,7 +135,7 @@
 	{
 
 
-		if (monthlySubsidy < 0|| period<=0 || initialAmount<0 || (chosenIndex==MarketIndex.Custom)&&customRate < 0)
+		if (monthlySubsidy < 0 || period <= 0 || initialAmount < 0 || (chosenIndex == MarketIndex.Custom) && customRate < 0)
 		{
 			ErrorMessage = "Set proper parimeters!";
 			return;
@@ -144,68 +144,79 @@
 		{
 			ErrorMessage = null;
 		}
-		if(customRate==null){
-			indexRate = Calc.GetIndexAnnualReturn(chosenIndex);
-		}
-		else
+		try
 		{
-			indexRate = customRate.GetValueOrDefault();
-		}
+			if (customRate == null)
+			{
+				indexRate = Calc.GetIndexAnnualReturn(chosenIndex);
+			}
+			else
+			{
+				indexRate = customRate.GetValueOrDefault();
+			}
 
-		var inputParams = new CalculatorParams(chosenIndex, monthlySubsidy.GetValueOrDefault(), initialAmount.GetValueOrDefault(), customRate.GetValueOrDefault(), indexRate, period);
-
-
-		if (includeTax == false)
-		{
-			finalResult = Calc.CalculateTotalValue(inputParams);
-			shouldShowTax = false;
-		}
-		else
-		{
-			finalResult = Calc.TotalValueAfterTax(inputParams);
-			shouldShowTax = true;
-		}
-
-		chartDatas = new List<ChartData>();
-		var valueProjection = Calc.GetYearlyProjection(inputParams);
-		for(int year=0; year<=period; year++)
-		{
-
-			var value = valueProjection[year];
+			var inputParams = new CalculatorParams(chosenIndex, monthlySubsidy.GetValueOrDefault(), initialAmount.GetValueOrDefault(), customRate.GetValueOrDefault(), indexRate, period);
 
 
-			if(year==period && includeTax==true){
+			if (includeTax == false)
+			{
+				finalResult = Calc.CalculateTotalValue(inputParams);
+				shouldShowTax = false;
+			}
+			else
+			{
+				finalResult = Calc.TotalValueAfterTax(inputParams);
+				shouldShowTax = true;
+			}
 
-				value = finalResult;
+			chartDatas = new List<ChartData>();
+			var valueProjection = Calc.GetYearlyProjection(inputParams);
+			for (int year = 0; year <= period; year++)
+			{
+
+				var value = valueProjection[year];
+
+
+				if (year == period && includeTax == true)
+				{
+
+					value = finalResult;
+				}
+
+
+				var point = new ChartData
+					{
+
+						Year = year,
+						Value = Math.Round(value, 2)
+
+
+					};
+
+				chartDatas.Add(point);
+
+
+
+
+
 			}
 
 
-			var point = new ChartData
-			 	{ 
-
-			 		Year = year,
-					Value = Math.Round( value, 2)
-					
-					
-			 	};
-
-			chartDatas.Add(point);
-
-
-
-
+			pureProfit = Calc.GetPureReturnValue(inputParams);
+			taxValue = Calc.CalculateTaxValue(inputParams);
+			if (myChart != null)
+			{
+				await myChart.UpdateSeriesAsync(true);
+			}
+			await Task.Delay(100);
+			await JSRuntime.InvokeVoidAsync("scrollToElement", "result-section");
 
 		}
-
-
-		pureProfit = Calc.GetPureReturnValue(inputParams);
-		taxValue = Calc.CalculateTaxValue(inputParams);
-		if (myChart != null)
+		catch (Exception ex)
 		{
-			await myChart.UpdateSeriesAsync(true);
+			ErrorMessage = "A critical error occurred. Please refresh the page and try again.";
+			Console.WriteLine(ex.Message);
 		}
-		await Task.Delay(100);
-		await JSRuntime.InvokeVoidAsync("scrollToElement", "result-section");
 	}
 
 	public class ChartData
