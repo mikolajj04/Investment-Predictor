@@ -1,5 +1,6 @@
 ﻿@page "/"
 @using InvestmentPredictor
+@inject ILogger<Home> Logger
 @inject IInvestmentCalculator Calc
 @inject IJSRuntime JSRuntime
 
@@ -215,7 +216,7 @@
 		catch (Exception ex)
 		{
 			ErrorMessage = "A critical error occurred. Please refresh the page and try again.";
-			Console.WriteLine(ex.Message);
+			Logger.LogCritical(ex, "CALCULATION_FATAL_ERROR: {Message}", ex.Message);
 		}
 	}
 
