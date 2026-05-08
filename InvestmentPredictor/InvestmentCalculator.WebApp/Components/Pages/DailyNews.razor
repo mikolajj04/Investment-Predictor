@@ -1,19 +1,48 @@
 ﻿@page "/DailyNews"
+@using InvestmentCalculator.WebApp.Services
+@using InvestmentPredictor.Core.DTOs
+@inject IMarketNewsService NewsService
 
-<PageTitle>Daily News</PageTitle>
-
-<h1>Daily News</h1>
+<PageTitle>Daily Market News</PageTitle>
 
 
-<p role="status">Current count: @currentCount</p>
+<h1>Daily Market News</h1>
 
-<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+@if (newsList == null)
+{
+    <p><em>Wczytywanie newsów z giełdy...</em></p>
+}
+else if (!newsList.Any())
+{
+    <p>Nie znaleziono żadnych nowych wiadomości.</p>
+}
+else
+{
+    <div class="news-container">
+        @foreach (var article in newsList)
+        {
+           
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">@article.Title</h5>
+                    <p class="card-text">@article.Summary</p>
+                    <p class="sentiment-score">@article.SentimentScore</p>
+                    <p class="text-muted small">Opublikowano: @article.TimePublished</p>
+                    <a href="@article.Url" target="_blank" class="btn btn-primary">Czytaj więcej</a>
+                </div>
+            </div>
+        }
+    </div>
+}
 
 @code {
-    private int currentCount = 0;
-
-    private void IncrementCount()
+    private List<NewsArticles>? newsList;
+    
+    protected override async Task OnInitializedAsync()
     {
-        currentCount++;
+        
+        newsList = (await NewsService.GetMarketNewsAsync()).OrderByDescending( x => x.SentimentScore).ToList();
+		
+
     }
 }

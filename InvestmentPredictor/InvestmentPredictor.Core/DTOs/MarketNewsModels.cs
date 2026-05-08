@@ -31,7 +31,7 @@ namespace InvestmentPredictor.Core.DTOs
         public string TimePublished { get; set; }
 
         [JsonPropertyName("overall_sentiment_score")]
-        public string SentimentScore { get; set; }
+        public double SentimentScore { get; set; }
     }
 
 }

@@ -1,5 +1,6 @@
 using ApexCharts;
 using InvestmentCalculator.WebApp.Components;
+using InvestmentCalculator.WebApp.Services;
 using InvestmentPredictor;
 
 
@@ -17,7 +18,10 @@ namespace InvestmentPredictor
                 .AddInteractiveServerComponents();
             builder.Services.AddApexCharts();
             builder.Services.AddScoped<IInvestmentCalculator, InvestmentCalculator>();
-
+            builder.Services.AddHttpClient<IMarketNewsService, MarketNewsService>(client=>
+            {
+                client.BaseAddress = new Uri("https://www.alphavantage.co/");
+            });
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
