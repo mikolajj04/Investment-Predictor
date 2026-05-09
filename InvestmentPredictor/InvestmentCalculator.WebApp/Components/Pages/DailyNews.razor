@@ -10,11 +10,11 @@
 
 @if (newsList == null)
 {
-    <p><em>Wczytywanie newsów z giełdy...</em></p>
+    <p><em>Loading market insights...</em></p>
 }
 else if (!newsList.Any())
 {
-    <p>Nie znaleziono żadnych nowych wiadomości.</p>
+    <p>No new market updates found at the moment.</p>
 }
 else
 {
@@ -27,8 +27,8 @@ else
                     <h5 class="card-title">@article.Title</h5>
                     <p class="card-text">@article.Summary</p>
                     <p class="sentiment-score">@article.SentimentScore</p>
-                    <p class="text-muted small">Opublikowano: @article.TimePublished</p>
-                    <a href="@article.Url" target="_blank" class="btn btn-primary">Czytaj więcej</a>
+                    <p class="text-muted small">Published: @article.TimePublished</p>
+                    <a href="@article.Url" target="_blank" class="btn btn-primary">Read more</a>
                 </div>
             </div>
         }
