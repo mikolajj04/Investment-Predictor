@@ -1,7 +1,7 @@
+using Microsoft.EntityFrameworkCore;
 using ApexCharts;
 using InvestmentCalculator.WebApp.Components;
 using InvestmentCalculator.WebApp.Services;
-using InvestmentPredictor;
 
 
 namespace InvestmentPredictor
@@ -22,6 +22,9 @@ namespace InvestmentPredictor
             {
                 client.BaseAddress = new Uri("https://www.alphavantage.co/");
             });
+            var connectionString = builder.Configuration.GetConnectionString("PostgresConnection");
+            //builder.Services.AddDbContext<AppDbContext>(options =>
+            //    options.UseNpgsql(connectionString));
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

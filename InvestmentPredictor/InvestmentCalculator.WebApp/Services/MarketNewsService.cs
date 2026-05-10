@@ -1,6 +1,4 @@
 ﻿using InvestmentPredictor.Core.DTOs;
-using System.Net.Http.Json;
-
 namespace InvestmentCalculator.WebApp.Services
 {
     public interface IMarketNewsService
