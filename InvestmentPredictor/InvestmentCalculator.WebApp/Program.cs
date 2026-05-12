@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using ApexCharts;
+using InvestmentPredictor.Core;
+using InvestmentCalculator.WebApp.Data;
 using InvestmentCalculator.WebApp.Components;
 using InvestmentCalculator.WebApp.Services;
 
@@ -17,14 +19,16 @@ namespace InvestmentPredictor
             builder.Services.AddRazorComponents()
                 .AddInteractiveServerComponents();
             builder.Services.AddApexCharts();
-            builder.Services.AddScoped<IInvestmentCalculator, InvestmentCalculator>();
+            builder.Services.AddScoped<IInvestmentCalculator, InvestmentPredictor.Core.InvestmentCalculator>();
             builder.Services.AddHttpClient<IMarketNewsService, MarketNewsService>(client=>
             {
                 client.BaseAddress = new Uri("https://www.alphavantage.co/");
             });
             var connectionString = builder.Configuration.GetConnectionString("PostgresConnection");
-            //builder.Services.AddDbContext<AppDbContext>(options =>
-            //    options.UseNpgsql(connectionString));
+
+            builder.Services.AddDbContext<AppDbContext>(options =>
+                options.UseNpgsql(connectionString));
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

@@ -1,5 +1,4 @@
 ﻿using System.Text.Json.Serialization;
-
 namespace InvestmentPredictor.Core.DTOs
 {
     public class AlphaVantageNewsResponse

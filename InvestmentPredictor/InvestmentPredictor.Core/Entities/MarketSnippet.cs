@@ -1,4 +1,4 @@
-﻿namespace InvestmentCalculator.WebApp.Entities
+﻿namespace InvestmentPredictor.Core.Entities
 {
     public class MarketSnippet
     {

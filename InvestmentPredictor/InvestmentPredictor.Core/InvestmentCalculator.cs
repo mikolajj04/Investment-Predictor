@@ -1,4 +1,4 @@
-﻿namespace InvestmentPredictor
+﻿namespace InvestmentPredictor.Core
 {
     public class InvestmentCalculator : IInvestmentCalculator
     {

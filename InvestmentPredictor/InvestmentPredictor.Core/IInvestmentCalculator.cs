@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace InvestmentPredictor
+namespace InvestmentPredictor.Core
 {
 
     public record CalculatorParams(

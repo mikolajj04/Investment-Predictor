@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using InvestmentCalculator.WebApp.Entities;
-using System.Security.Cryptography.X509Certificates;
+using InvestmentPredictor.Core.Entities;
 
 namespace InvestmentCalculator.WebApp.Data
 {

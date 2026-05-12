@@ -1,11 +1,8 @@
 ﻿using InvestmentPredictor.Core.DTOs;
+using InvestmentPredictor.Core;
 namespace InvestmentCalculator.WebApp.Services
 {
-    public interface IMarketNewsService
-    {
-        Task<List<NewsArticles>> GetMarketNewsAsync();
-
-    }
+  
 
     public class MarketNewsService : IMarketNewsService
     {
