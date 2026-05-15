@@ -18,7 +18,11 @@ namespace InvestmentCalculator.WebApp.Services
 
         public async Task<List<NewsArticles>> GetMarketNewsAsync()
         {
-            var apiKey = _config["AlphaVantage:ApiKey"] ?? "demo";
+            var apiKey = _config["AlphaVantage:ApiKey"];
+            if (string.IsNullOrEmpty(apiKey))
+            {
+                throw new InvalidOperationException("AlphaVantage ApiKey is missing from configuration!");
+            }
             var url = $"query?function=NEWS_SENTIMENT&tickers=AAPL,TSLA,MSFT&apikey={apiKey}";
             var response = await _httpClient.GetFromJsonAsync<AlphaVantageNewsResponse>(url);
             return response?.Feed ?? new List<NewsArticles>();
