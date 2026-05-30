@@ -7,7 +7,8 @@
 A professional investment calculator built with **.NET 8 Blazor**, designed to simulate capital growth while accounting for capital gains tax (Belka tax) and historical market index returns.
 
  **Live Application:** [mj-invest-calc.azurewebsites.net](https://mj-invest-calc.azurewebsites.net)
-
+ 
+> ℹ️ **Hosting Note:** This live demo is deployed on a free Microsoft Azure instance. If the application has been inactive, the server goes to sleep. As a result, the first request may take around 10 seconds to spin up the environment (*cold start*). 
 ---
 
 ## 🛠️ Tech Stack
