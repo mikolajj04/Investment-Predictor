@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.12.35527.113
+# Visual Studio Version 18
+VisualStudioVersion = 18.7.11911.148 stable
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvestmentPredictor.Console", "InvestmentPredictor.Console\InvestmentPredictor.Console.csproj", "{44E64ABF-A2C8-4DE8-A70C-57DED07D321B}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvestmentPredictor.api", "InvestmentPredictor.api\InvestmentPredictor.api.csproj", "{CA1AF64B-392B-3D94-71D5-19561C468CFA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvestmentCalculator.WebApp", "InvestmentCalculator.WebApp\InvestmentCalculator.WebApp.csproj", "{797FC26E-3001-A702-50C9-0DB047C52D3D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvestmentPredictor.Core.Tests", "InvestmentPredictor.Core.Tests\InvestmentPredictor.Core.Tests.csproj", "{16D28C90-9D72-45CF-9BF0-5C0E7A80C161}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{797FC26E-3001-A702-50C9-0DB047C52D3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{797FC26E-3001-A702-50C9-0DB047C52D3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{797FC26E-3001-A702-50C9-0DB047C52D3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16D28C90-9D72-45CF-9BF0-5C0E7A80C161}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16D28C90-9D72-45CF-9BF0-5C0E7A80C161}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16D28C90-9D72-45CF-9BF0-5C0E7A80C161}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16D28C90-9D72-45CF-9BF0-5C0E7A80C161}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
