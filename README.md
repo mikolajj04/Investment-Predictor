@@ -3,6 +3,7 @@
 ![License](https://img.shields.io/badge/license-MIT-green?style=flat)
 ![Azure](https://img.shields.io/badge/Azure-Deployed-0089D6?style=flat&logo=microsoftazure)
 ![Status](https://img.shields.io/badge/Status-Active-success)
+![Tests](https://img.shields.io/badge/Tests-Passing-success?style=flat&logo=xunit&logoColor=white)
 
 A professional investment calculator built with **.NET 8 Blazor**, designed to simulate capital growth while accounting for capital gains tax (Belka tax) and historical market index returns.
 
@@ -18,6 +19,7 @@ A professional investment calculator built with **.NET 8 Blazor**, designed to s
 * **Charting:** ApexCharts.Blazor
 * **Cloud/Hosting:** Microsoft Azure (App Service)
 * **Architecture:** Clean Architecture (Separation of Concerns)
+* **Testing:** xUnit / FluentAssertions (Comprehensive Unit Testing)
 
 ## Key Features
 - [x] **Compound Interest Engine:** Real-time calculation of investment future value.
@@ -32,6 +34,7 @@ The project follows **Clean Architecture** principles to ensure scalability.
 * **[InvestmentPredictor.WebApp:](./InvestmentPredictor/InvestmentCalculator.WebApp)** The Blazor presentation layer, handling the user interface and cloud integration.
 * **[InvestmentPredictor.Console (Legacy/Testing):](./InvestmentPredictor/InvestmentPredictor.Console)** The initial version of the project. Currently used as a sandbox for rapid testing of new financial algorithms.
 * **[InvestmentPredictor.api (Experimental):](InvestmentPredictor/InvestmentPredictor.api)** A REST API layer designed to potentially serve data to other clients (e.g., mobile apps) in the future.
+* **[InvestmentPredictor.Core.Tests:](./InvestmentPredictor/InvestmentPredictor.Core.Tests)** A comprehensive unit testing project securing core financial logic, input validation, and edge-case handling.
 
 ## 📊 Calculation Methodology
 * **Historical Data Benchmarking:** When selecting a market index (e.g., S&P 500), the system utilizes a 20-year historical average return (where applicable). This provides a smoothed, long-term perspective on market performance, filtering out short-term volatility.
