@@ -24,6 +24,7 @@ namespace InvestmentPredictor
             {
                 client.BaseAddress = new Uri("https://www.alphavantage.co/");
             });
+            builder.Services.AddHttpClient<IAiSummaryService, GeminiSummaryService>();
             var connectionString = builder.Configuration.GetConnectionString("PostgresConnection");
 
             builder.Services.AddDbContext<AppDbContext>(options =>
