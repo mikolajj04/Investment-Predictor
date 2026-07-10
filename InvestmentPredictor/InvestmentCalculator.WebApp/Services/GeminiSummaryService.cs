@@ -24,7 +24,7 @@ namespace InvestmentCalculator.WebApp.Services
             }
 
             var prompt = "Jesteś analitykiem finansowym. Poniżej masz listę najnowszych nagłówków i krótkich opisów z rynku giełdowego. " +
-                         "Twoim zadaniem jest napisanie jednego, profesjonalnego, bardzo spójnego podsumowania (maksymalnie 5-6 zdań) " +
+                         "Twoim zadaniem jest napisanie jednego, profesjonalnego, bardzo spójnego podsumowania (maksymalnie 4-5 zdania). Opisania sytuacji profesjonalnym ale zrozumiałym językiem. " +
                          "w języku polskim, które oceni ogólny sentyment na rynku.\n\n" +
                          string.Join("\n- ", articles);
 
@@ -36,9 +36,14 @@ namespace InvestmentCalculator.WebApp.Services
                 }
             };
 
-            var url = $"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={_apiKey}";
+            var url = $"https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-lite-latest:generateContent?key={_apiKey}";
             var response = await _httpClient.PostAsJsonAsync(url, requestBody);
-            response.EnsureSuccessStatusCode();
+            if (!response.IsSuccessStatusCode)
+            {
+      
+                var errorContent = await response.Content.ReadAsStringAsync();
+                throw new HttpRequestException($"API Gemini Error: {response.StatusCode} - details: {errorContent}");
+            }
             var jsonResponse = await response.Content.ReadFromJsonAsync<JsonElement>();
 
             var summary = jsonResponse
