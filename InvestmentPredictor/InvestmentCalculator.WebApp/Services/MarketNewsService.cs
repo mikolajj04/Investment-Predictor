@@ -18,8 +18,8 @@ namespace InvestmentCalculator.WebApp.Services
 
         public async Task<List<NewsArticles>> GetMarketNewsAsync()
         {
-           
-            var url = $"query?function=NEWS_SENTIMENT&tickers=AAPL,TSLA,MSFT&apikey={_apiKey}";
+
+            var url = $"query?function=NEWS_SENTIMENT&topics=economy_macro,finance,energy_transportation,technology&sort=LATEST&limit=100&apikey={_apiKey}";
             var response = await _httpClient.GetFromJsonAsync<AlphaVantageNewsResponse>(url);
             return response?.Feed ?? new List<NewsArticles>();
         }
