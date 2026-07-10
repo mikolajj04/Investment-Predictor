@@ -32,17 +32,19 @@ namespace InvestmentCalculator.WebApp.Services
 
                     //var rawNews = await newsService.GetMarketNewsAsync();
                     //var topArticles = rawNews
-                    //    .OrderByDescending(n => n.SentimentScore)
-                    //    .Take(10)
+                    //    .Where(n=>Math.Abs(n.SentimentScore)>=0.15)
+                    //    .OrderByDescending(n => Math.Abs(n.SentimentScore))
+                    //    .Take(15)
                     //    .Select(n => $"{n.Title}: {n.Summary}")
                     //    .ToList();
 
                     //MOCK Articles
                     var topArticles = new List<string>
                     {
-                        "Apple: Apple ogłosiło upadłość!",
-                        "Tesla: Elon Musk z niewiadomego powodu masowo zwalnia pracowników.",
-                        "Microsoft: AI spowodowało wyciek poufnych danych klientów!"
+                        "Makroekonomia: Rezerwa Federalna (Fed) decyduje o pozostawieniu stóp procentowych bez zmian, co stabilizuje rynki finansowe.",
+                        "Energia: Ceny ropy naftowej brent spadają o 3% z powodu zwiększonego wydobycia w krajach OPEC.",
+                        "Finanse: Europejskie banki odnotowują rekordowe zyski w pierwszym kwartale dzięki wyższym marżom odsetkowym.",
+                        "Technologia: Gemini Flash-Lite rewolucjonizuje rynek systemów automatyzacji backendu w chmurze."
                     };
 
                     if (topArticles.Any())
