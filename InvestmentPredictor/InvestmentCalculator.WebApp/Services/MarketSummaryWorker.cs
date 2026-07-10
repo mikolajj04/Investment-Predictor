@@ -19,9 +19,21 @@ namespace InvestmentCalculator.WebApp.Services
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
+           
+            
+
             _logger.LogInformation("The Night AI Orchestrator has begun its work.");
             while (!stoppingToken.IsCancellationRequested)
             {
+                var now = DateTime.Now;
+                var nextRun = now.Date.AddHours(3);
+                if (now >= nextRun)
+                {
+                    nextRun = nextRun.AddDays(1);
+                }
+                var delay = nextRun - now;
+                _logger.LogInformation($"Orkiestrator went to sleep. Next wake-up in: {delay.TotalHours:F2} hours | on: {nextRun}.");
+                await Task.Delay(delay, stoppingToken);
                 try
                 {
                     _logger.LogInformation("Orchestrator is waking up. Generating summary...");
@@ -78,8 +90,8 @@ namespace InvestmentCalculator.WebApp.Services
                     _logger.LogError(ex, "Critical Error in Night AI Orchestrator");
                 }
 
-                _logger.LogInformation("The Night AI Orchestrator will sleep for 2 minutes");
-                await Task.Delay(TimeSpan.FromMinutes(2), stoppingToken);
+                
+               
             }
         }
 
