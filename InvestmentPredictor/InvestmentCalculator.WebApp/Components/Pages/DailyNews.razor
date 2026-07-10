@@ -1,50 +1,48 @@
 ﻿@page "/DailyNews"
-@using InvestmentCalculator.WebApp.Services
-@using InvestmentPredictor.Core.DTOs
-@using InvestmentPredictor.Core
-@inject IMarketNewsService NewsService
+@using InvestmentPredictor.Core.Entities
+@using Microsoft.EntityFrameworkCore
+@using InvestmentCalculator.WebApp.Data
+@inject AppDbContext DbContext
 
-<PageTitle>Daily Market News</PageTitle>
+<PageTitle>Daily Market AI Summary</PageTitle>
 
+<div class="container mt-4">
+    <h2 class="fw-bold">🤖 Poranne Podsumowanie AI</h2>
+    <p class="text-muted">Syntetyczna analiza sentymentu rynkowego na podstawie gigantów technologicznych (AAPL, TSLA, MSFT).</p>
+    <hr />
 
-<h1>Daily Market News</h1>
-<h4>  [coming soon...]</h4>
-
-@if (newsList == null)
-{
-    <p><em>Loading market insights...</em></p>
-}
-else if (!newsList.Any())
-{
-    <p>No new market updates found at the moment.</p>
-}
-else
-{
-    <div class="news-container">
-        @foreach (var article in newsList)
-        {
-           
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h5 class="card-title">@article.Title</h5>
-                    <p class="card-text">@article.Summary</p>
-                    <p class="sentiment-score">@article.SentimentScore</p>
-                    <p class="text-muted small">Published: @article.TimePublished</p>
-                    <a href="@article.Url" target="_blank" class="btn btn-primary">Read more</a>
+    @if (latestSnippet == null)
+    {
+        <div class="alert alert-warning shadow-sm border-0" role="alert">
+            <h5 class="alert-heading">Brak danych!</h5>
+            <p>Trwa ładowanie najświeższych danych z bazy lub Nocny Orkiestrator jeszcze nie wygenerował dzisiejszego raportu z powodu przeciążeń sieci.</p>
+        </div>
+    }
+    else
+    {
+        <div class="card shadow border-0 bg-light mt-4">
+            <div class="card-body p-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="card-title text-primary mb-0">Sentyment Wall Street</h5>
+                    <span class="badge bg-secondary">@latestSnippet.CreatedAt.ToLocalTime().ToString("g")</span>
                 </div>
+
+                <p class="card-text mt-3" style="font-size: 1.15rem; line-height: 1.7;">
+                    @latestSnippet.Content
+                </p>
             </div>
-        }
-    </div>
-}
+        </div>
+    }
+</div>
 
 @code {
-    private List<NewsArticles>? newsList;
-    
+    private MarketSnippet? latestSnippet;
+
     protected override async Task OnInitializedAsync()
     {
-        
-        newsList = (await NewsService.GetMarketNewsAsync()).OrderByDescending( x => x.SentimentScore).ToList();
-		
-
+       
+        latestSnippet = await DbContext.MarketSnippets
+                                       .OrderByDescending(s => s.CreatedAt)
+                                       .FirstOrDefaultAsync();
     }
 }
