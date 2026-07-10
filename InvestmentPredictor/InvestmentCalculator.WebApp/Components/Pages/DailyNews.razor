@@ -8,7 +8,7 @@
 
 <div class="container mt-4">
     <h2 class="fw-bold">🤖 Poranne Podsumowanie AI</h2>
-    <p class="text-muted">Syntetyczna analiza sentymentu rynkowego na podstawie gigantów technologicznych (AAPL, TSLA, MSFT).</p>
+    <p class="text-muted">Syntetyczna analiza globalnego sentymentu rynkowego i makroekonomicznego</p>
     <hr />
 
     @if (latestSnippet == null)
@@ -27,7 +27,7 @@
                     <span class="badge bg-secondary">@latestSnippet.CreatedAt.ToLocalTime().ToString("g")</span>
                 </div>
 
-                <p class="card-text mt-3" style="font-size: 1.15rem; line-height: 1.7;">
+                <p class="card-text mt-3" style="font-size: 1.15rem; line-height: 1.7; white-space: pre-line;">
                     @latestSnippet.Content
                 </p>
             </div>
