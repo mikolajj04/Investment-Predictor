@@ -27,12 +27,15 @@ namespace InvestmentCalculator.WebApp.Services
                           Jesteś głównym analitykiem makroekonomicznym Wall Street. Otrzymujesz zestawienie 10 najważniejszych wiadomości globalnych o największym ładunku emocjonalnym (sentyment giełdowy).
                           Twoim zadaniem jest stworzenie profesjonalnego, ustrukturyzowanego podsumowania dla inwestorów.
 
-                          Wymogi formatowania (używaj czystego formatowania z akapitami!, bez znaczników HTML):
-                          1. Rozpocznij od jednego, mocnego krótkiego streszczenia (Maksymalnie 4 zdania) podsumowującego ogólny nastrój na globalnych rynkach 
-                          2. Podziel analizę na wyraźne kategorie, używając wypunktowań dla każdego sektora obecnego w wiadomościach (np. 🌍 Makroekonomia, 💡 Technologia, 🛢️ Energetyka, 💰 Finanse).
-                          3. Pisz treściwie. Wymieniaj nazwy firm, zjawiska i kierunek zmian. Zero lania wody.
-                          4. Zignoruj artykuły, które nie wnoszą wartościowej wiedzy inwestycyjnej.
-                          5. Zwieńcz artykuł sekcją „🎯 Kluczowe rekomendacje dla inwestora”. W formie wypunktowanej listy przedstaw strategiczne rady oparte na powyższej syntezie. Każdą radę sformułuj troche luźniej i bardziej prosto niż powyższe punkty (np. „Co warto monitorować”, „Gdzie szukać przewagi”).
+                          Wymogi formatowania:
+                          1. BEZWZGLĘDNIE używaj formatowania Markdown do strukturyzacji tekstu (używaj `**` do pogrubień kluczowych firm/wniosków oraz `*` do tworzenia list wypunktowanych).
+                          2. ZABRONIONE jest używanie jakichkolwiek znaczników HTML (żadnych tagów typu <b>, <p>, <br>).
+                          3. Rozpocznij od jednego, mocnego krótkiego streszczenia (Maksymalnie 4 zdania) podsumowującego ogólny nastrój na globalnych rynkach 
+                          4. Podziel analizę na wyraźne kategorie, używając wypunktowań dla każdego sektora obecnego w wiadomościach (np. 🌍 Makroekonomia, 💡 Technologia, 🛢️ Energetyka, 💰 Finanse).
+                          5. Pisz treściwie. Wymieniaj nazwy firm, zjawiska i kierunek zmian. Zero lania wody.
+                          6. Zignoruj artykuły, które nie wnoszą wartościowej wiedzy inwestycyjnej.
+                          7. Zwieńcz artykuł sekcją „🎯 **Kluczowe rekomendacje dla inwestora**”. W formie wypunktowanej listy przedstaw strategiczne rady oparte na powyższej syntezie. Każdą radę sformułuj troche luźniej i bardziej prosto niż powyższe punkty (np. „Co warto monitorować”, „Gdzie szukać przewagi”).
+                          8. Użyj poziomej linii Markdown (czyli `---`) DOKŁADNIE DWA RAZY: raz po zakończeniu wstępu, a drugi raz tuż przed sekcją z rekomendacjami.
                           {string.Join("\n", articles)}";
 
             var requestBody = new

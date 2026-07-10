@@ -23,17 +23,24 @@ namespace InvestmentCalculator.WebApp.Services
             
 
             _logger.LogInformation("The Night AI Orchestrator has begun its work.");
+
+            bool isFirstRun = true;
             while (!stoppingToken.IsCancellationRequested)
             {
                 var now = DateTime.Now;
-                var nextRun = now.Date.AddHours(3);
+                var nextRun = now.Date.AddHours(1);
                 if (now >= nextRun)
                 {
                     nextRun = nextRun.AddDays(1);
                 }
                 var delay = nextRun - now;
-                _logger.LogInformation($"Orkiestrator went to sleep. Next wake-up in: {delay.TotalHours:F2} hours | on: {nextRun}.");
-                await Task.Delay(delay, stoppingToken);
+                if (!isFirstRun)
+                {
+                    _logger.LogInformation($"Orkiestrator went to sleep. Next wake-up in: {delay.TotalHours:F2} hours | on: {nextRun}.");
+                    await Task.Delay(delay, stoppingToken);
+                }
+
+                isFirstRun = false;
                 try
                 {
                     _logger.LogInformation("Orchestrator is waking up. Generating summary...");
@@ -42,29 +49,29 @@ namespace InvestmentCalculator.WebApp.Services
                     var aiService = scope.ServiceProvider.GetRequiredService<IAiSummaryService>();
                     var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
-                    //var rawNews = await newsService.GetMarketNewsAsync();
-                    //var topArticles = rawNews
-                    //    .Where(n=>Math.Abs(n.SentimentScore)>=0.15)
-                    //    .OrderByDescending(n => Math.Abs(n.SentimentScore))
-                    //    .Take(15)
-                    //    .Select(n => $"{n.Title}: {n.Summary}")
-                    //    .ToList();
+                    var rawNews = await newsService.GetMarketNewsAsync();
+                    var topArticles = rawNews
+                        .Where(n => Math.Abs(n.SentimentScore) >= 0.15)
+                        .OrderByDescending(n => Math.Abs(n.SentimentScore))
+                        .Take(15)
+                        .Select(n => $"{n.Title}: {n.Summary}")
+                        .ToList();
 
-                    //MOCK Articles
-                    var topArticles = new List<string>
-                    {
-                        "Makroekonomia: Rezerwa Federalna (Fed) decyduje o pozostawieniu stóp procentowych bez zmian, co stabilizuje rynki finansowe.",
-                        "Energia: Ceny ropy naftowej brent spadają o 3% z powodu zwiększonego wydobycia w krajach OPEC.",
-                        "Finanse: Europejskie banki odnotowują rekordowe zyski w pierwszym kwartale dzięki wyższym marżom odsetkowym.",
-                        "Technologia: Gemini Flash-Lite rewolucjonizuje rynek systemów automatyzacji backendu w chmurze."
-                    };
+                    //---MOCK Articles----
+                    //var topArticles = new List<string>
+                    //{
+                    //    "Makroekonomia: Rezerwa Federalna (Fed) decyduje o pozostawieniu stóp procentowych bez zmian, co stabilizuje rynki finansowe.",
+                    //    "Energia: Ceny ropy naftowej brent spadają o 3% z powodu zwiększonego wydobycia w krajach OPEC.",
+                    //    "Finanse: Europejskie banki odnotowują rekordowe zyski w pierwszym kwartale dzięki wyższym marżom odsetkowym.",
+                    //    "Technologia: Gemini Flash-Lite rewolucjonizuje rynek systemów automatyzacji backendu w chmurze."
+                    //};
 
                     if (topArticles.Any())
                     {
                         _logger.LogInformation($"Sending {topArticles.Count} articles to AI brain...");
                         var aiSummary = await aiService.GenerateMarketSummaryAsync(topArticles);
 
-                        //MOCK Gemini
+                        //---MOCK Gemini----
                         //var aiSummary = "🤖 [Mock AI]: Rynek technologiczny w fazie silnej korekty. Akcje Tesli nieznacznie tracą na wartości w obliczu nowych danych produkcyjnych, natomiast Microsoft kontynuuje stabilny wzrost napędzany gigantycznym popytem na usługi chmurowe Azure i rozwiązania sztucznej inteligencji.";
 
 
