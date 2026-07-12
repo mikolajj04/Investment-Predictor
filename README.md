@@ -26,7 +26,7 @@ A professional investment calculator built with **.NET 8 Blazor**, designed to s
 - [x] **Tax Logic:** Automated 19% capital gains tax deduction on profits.
 - [x] **Modern UI:** Fully responsive "Drawer" style navigation menu for both Mobile and Desktop.
 - [x] **Interactive Visualization:** Dynamic line charts showing capital growth over time.
-- [x] **AI Investment News :** Market insights aggregator powered by AI (Gemini API).
+- [x] **AI Investment News (Not deployed yet):** Market insights aggregator powered by AI (Gemini API).
 
 ## 🏗️ Project Structure
 The project follows **Clean Architecture** principles to ensure scalability.
