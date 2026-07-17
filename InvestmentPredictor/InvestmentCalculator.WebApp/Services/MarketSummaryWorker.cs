@@ -28,7 +28,7 @@ namespace InvestmentCalculator.WebApp.Services
             while (!stoppingToken.IsCancellationRequested)
             {
                 var now = DateTime.Now;
-                var nextRun = now.Date.AddHours(1);
+                var nextRun = now.Date.AddHours(6).AddMinutes(15);
                 if (now >= nextRun)
                 {
                     nextRun = nextRun.AddDays(1);
