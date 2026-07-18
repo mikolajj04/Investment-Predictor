@@ -49,6 +49,20 @@ The application is logically split into two, decoupled product modules:
 *   **AI Synthesis & Summarization:** Advanced NLP orchestration powered by the Gemini API, generating smart, context-aware morning market reports.
 *   **Decoupled Orchestration:** Background worker executing scheduled cron-like updates independently of client traffic.
 *   **Persistent Analytics Cache:** All market snapshots are fully structured and saved via EF Core into an isolated cloud database (PostgreSQL) for instant retrieval speeds.
+### ⏱️ Data Aggregation Strategy (08:30 CET/CEST Execution)
+
+The background orchestrator (IHostedService) is scheduled to execute the Alpha Vantage API pipeline daily at exactly **08:30 AM local Polish time**. 
+
+#### 1. Business Logic (Why 08:30?):
+This execution window consolidates a global market snapshot just before the European trading session begins:
+* **Asia:** Captures confirmed closing metrics from Tokyo and Shanghai.
+* **Europe:** Intersects with pre-market analyses (~30 minutes before London/Frankfurt opening bells).
+* **USA:** Captures early S&P 500 futures trajectory based on overnight global momentum.
+
+#### 2. Technical Implementation & Resilience:
+* **Timezone Handling:** Utilizes TimeZoneInfo to strictly bind execution to Central European Standard Time. This ensures the schedule remains immune to Azure's default UTC host configuration and automatically adjusts for DST (Daylight Saving Time) shifts.
+* **API Rate Limit Protection:** To strictly respect Alpha Vantage free-tier limits, the orchestrator queries the PostgreSQL database (AnyAsync) to verify if a daily report already exists before initiating any external HTTP calls.
+* **Fault Tolerance:** In case of API timeouts or empty responses, the system catches the exception and defers execution, sleeping for 15-minute intervals until the data is successfully fetched and saved.
 
 ## 📁 Project Structure
 The project follows **Clean Architecture** principles to ensure scalability.
