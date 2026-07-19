@@ -26,7 +26,7 @@ A professional investment calculator and market analysis platform built using **
 | **Data Visualization** | ApexCharts.Blazor |
 | **ORM & Database** | Entity Framework Core / Azure Database for PostgreSQL (Flexible Server) |
 | **AI & External APIs** | Google Gemini API / Alpha Vantage API |
-| **Background Processes** | .NET Hosted Services (`IHostedService`) |
+| **Background Processes** | .NET Hosted Services (IHostedService) |
 | **Containerization** | Docker / Docker Compose |
 | **Testing Engine** | xUnit / FluentAssertions |
 
