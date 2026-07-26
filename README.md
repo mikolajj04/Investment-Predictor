@@ -51,7 +51,7 @@ The application is logically split into two, decoupled product modules:
 *   **Persistent Analytics Cache:** All market snapshots are fully structured and saved via EF Core into an isolated cloud database (PostgreSQL) for instant retrieval speeds.
 ### ⏱️ Data Aggregation Strategy (08:30 CET/CEST Execution)
 
-The background orchestrator (IHostedService) is scheduled to execute the Alpha Vantage API pipeline daily at exactly **08:30 AM local Polish time**. 
+The background orchestrator (IHostedService) implements a robust polling mechanism rather than a rigid task schedule. It is designed to execute the Alpha Vantage API pipeline daily within a 15-minute execution window immediately following **08:30 AM** local Polish time. This approach ensures maximum fault tolerance (against third-party API instability) and adaptability to cloud environment hibernation cycles.
 
 #### 1. Business Logic (Why 08:30?):
 This execution window consolidates a global market snapshot just before the European trading session begins:
