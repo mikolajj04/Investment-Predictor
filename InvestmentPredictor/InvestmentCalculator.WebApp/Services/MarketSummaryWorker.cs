@@ -105,8 +105,8 @@ namespace InvestmentCalculator.WebApp.Services
                     _logger.LogError(ex, "Critical Error in Night AI Orchestrator");
                 }
 
-                _logger.LogInformation("Orchestrator went to sleep for next 15 minutes");
-                await Task.Delay(TimeSpan.FromMinutes(15), stoppingToken);
+                _logger.LogInformation("Orchestrator went to sleep for next 10 minutes");
+                await Task.Delay(TimeSpan.FromMinutes(10), stoppingToken);
 
 
             }
