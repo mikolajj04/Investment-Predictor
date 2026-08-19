@@ -49,6 +49,7 @@ The application is logically split into two, decoupled product modules:
 *   **AI Synthesis & Summarization:** Advanced NLP orchestration powered by the Gemini API, generating smart, context-aware morning market reports.
 *   **Decoupled Orchestration:** Background worker executing scheduled cron-like updates independently of client traffic.
 *   **Persistent Analytics Cache:** All market snapshots are fully structured and saved via EF Core into an isolated cloud database (PostgreSQL) for instant retrieval speeds.
+*   **Dual-Language Generation:** The Gemini API pipeline leverages structured JSON output to generate both Polish and English market reports in a single call, allowing users to seamlessly toggle languages without reloading the application.
 ### ⏱️ Data Aggregation Strategy (08:30 CET/CEST Execution)
 
 The background orchestrator (IHostedService) implements a robust polling mechanism rather than a rigid task schedule. It is designed to execute the Alpha Vantage API pipeline daily within a 10-minute execution window immediately following **08:30 AM** local Polish time. This approach ensures maximum fault tolerance (against third-party API instability) and adaptability to cloud environment hibernation cycles.
