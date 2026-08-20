@@ -28,4 +28,9 @@ namespace InvestmentPredictor.Core.DTOs
         public double SentimentScore { get; set; }
     }
 
+    public record MarketSummaryResult(string PolishSummary, string EnglishSummary);
+
+
+
+
 }
