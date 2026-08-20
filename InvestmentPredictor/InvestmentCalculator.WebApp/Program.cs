@@ -26,7 +26,10 @@ namespace InvestmentPredictor
             });
             builder.Services.AddHttpClient<IAiSummaryService, GeminiSummaryService>().AddStandardResilienceHandler();
             builder.Services.AddHostedService<MarketSummaryWorker>();
-            builder.Services.AddApplicationInsightsTelemetry();
+            if (!builder.Environment.IsDevelopment())
+            {
+                builder.Services.AddApplicationInsightsTelemetry();
+            }
             var connectionString = builder.Configuration.GetConnectionString("PostgresConnection");
 
             builder.Services.AddDbContext<AppDbContext>(options =>

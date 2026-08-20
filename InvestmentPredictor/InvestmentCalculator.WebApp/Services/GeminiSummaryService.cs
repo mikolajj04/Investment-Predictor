@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using System.Text.Json;
 using InvestmentPredictor.Core;
+using InvestmentPredictor.Core.DTOs;
 
 namespace InvestmentCalculator.WebApp.Services
 {
@@ -16,26 +17,33 @@ namespace InvestmentCalculator.WebApp.Services
 
         }
 
-        public async Task<string> GenerateMarketSummaryAsync(List<string> articles)
+        public async Task<MarketSummaryResult> GenerateMarketSummaryAsync(List<string> articles)
         {
             if(articles == null || !articles.Any())
             {
-                return "No news to summarize.";
+                return new MarketSummaryResult("Brak danych do streszczenia", "No news to summarize");
             }
 
             var prompt = $@"
-                          Jesteś głównym analitykiem makroekonomicznym Wall Street. Otrzymujesz zestawienie 10 najważniejszych wiadomości globalnych o największym ładunku emocjonalnym (sentyment giełdowy).
-                          Twoim zadaniem jest stworzenie profesjonalnego, ustrukturyzowanego podsumowania dla inwestorów.
+                          Jesteś głównym analitykiem makroekonomicznym Wall Street. Otrzymujesz zestawienie najważniejszych wiadomości globalnych o największym ładunku emocjonalnym (sentyment giełdowy).
+                          Twoim zadaniem jest stworzenie profesjonalnego, ustrukturyzowanego podsumowania dla inwestorów w DWÓCH wersjach językowych: polskiej i angielskiej.
 
                           Wymogi formatowania:
                           1. BEZWZGLĘDNIE używaj formatowania Markdown do strukturyzacji tekstu (używaj `**` do pogrubień kluczowych firm/wniosków oraz `*` do tworzenia list wypunktowanych).
                           2. ZABRONIONE jest używanie jakichkolwiek znaczników HTML (żadnych tagów typu <b>, <p>, <br>).
                           3. Rozpocznij od jednego, mocnego krótkiego streszczenia (Maksymalnie 4 zdania) podsumowującego ogólny nastrój na globalnych rynkach 
-                          4. Podziel analizę na wyraźne kategorie, używając wypunktowań dla każdego sektora obecnego w wiadomościach (np. 🌍 Makroekonomia, 💡 Technologia, 🛢️ Energetyka, 💰 Finanse).
+                          4. Podziel analizę na wyraźne kategorie, używając wypunktowań dla każdego sektora obecnego w wiadomościach (np. 🌍 Makroekonomia / 🌍 Macroeconomics, 💡 Technologia / 💡 Technology, 💰 Finanse / 💰 Finance).
                           5. Pisz treściwie. Wymieniaj nazwy firm, zjawiska i kierunek zmian. Zero lania wody.
                           6. Zignoruj artykuły, które nie wnoszą wartościowej wiedzy inwestycyjnej.
-                          7. Zwieńcz artykuł sekcją „🎯 **Kluczowe rekomendacje dla inwestora**”. W formie wypunktowanej listy przedstaw strategiczne rady oparte na powyższej syntezie. Każdą radę sformułuj troche luźniej i bardziej prosto niż powyższe punkty (np. „Co warto monitorować”, „Gdzie szukać przewagi”).
+                          7. Zwieńcz artykuł sekcją „🎯 **Kluczowe rekomendacje dla inwestora** / 🎯 **Key Takeaways for Investors**”. W formie wypunktowanej listy przedstaw strategiczne rady oparte na powyższej syntezie. Każdą radę sformułuj troche luźniej i bardziej prosto niż powyższe punkty (np. „Co warto monitorować”, „Gdzie szukać przewagi”).
                           8. Użyj poziomej linii Markdown (czyli `---`) DOKŁADNIE DWA RAZY: raz po zakończeniu wstępu, a drugi raz tuż przed sekcją z rekomendacjami.
+                          ODPOWIEDZ WYŁĄCZNIE CZYSTYM OBIEKTEM JSON (bez znaczników markdown typu ```json):
+                            {{
+                              ""summaryPl"": ""...treść markdown po polsku..."",
+                              ""summaryEn"": ""...treść markdown po angielsku...""
+                            }}
+
+                          Oto Wiadomości:
                           {string.Join("\n", articles)}";
 
             var requestBody = new
@@ -43,6 +51,10 @@ namespace InvestmentCalculator.WebApp.Services
                 contents = new[]
                 {
                     new { parts = new[] { new { text = prompt } } }
+                },
+                generationConfig = new
+                {
+                    responseMimeType = "application/json"
                 }
             };
 
@@ -56,13 +68,16 @@ namespace InvestmentCalculator.WebApp.Services
             }
             var jsonResponse = await response.Content.ReadFromJsonAsync<JsonElement>();
 
-            var summary = jsonResponse
+            var rawText = jsonResponse
                 .GetProperty("candidates")[0]
                 .GetProperty("content")
                 .GetProperty("parts")[0]
                 .GetProperty("text").GetString();
+            using var doc = JsonDocument.Parse(rawText!);
+            var pl = doc.RootElement.GetProperty("summaryPl").GetString() ?? string.Empty;
+            var en = doc.RootElement.GetProperty("summaryEn").GetString() ?? string.Empty;
 
-            return summary ?? "Something went wrong... no summary generated.";
+            return new MarketSummaryResult(pl, en);
 
         }
         
