@@ -1,0 +1,45 @@
+
+.lang-switch {
+    position: relative;
+    display: inline-flex;
+    background-color: #e9ecef;
+    border-radius: 50px;
+    padding: 4px;
+    width: 160px; 
+}
+
+.lang-btn {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 6px 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #6c757d;
+    border-radius: 50px;
+    cursor: pointer;
+    z-index: 2;
+    transition: color 0.3s ease;
+    text-align: center;
+}
+
+    .lang-btn.active {
+        color: #212529;
+    }
+
+.lang-slider {
+    position: absolute;
+    top: 4px;
+    bottom: 4px;
+    left: 4px;
+    width: calc(50% - 4px);
+    background-color: #ffffff;
+    border-radius: 50px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    z-index: 1;
+}
+
+.lang-switch.en-active .lang-slider {
+    transform: translateX(100%);
+}

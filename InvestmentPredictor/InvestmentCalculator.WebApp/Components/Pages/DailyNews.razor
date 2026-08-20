@@ -5,31 +5,58 @@
 @using Markdig
 @inject AppDbContext DbContext
 
-<PageTitle>Daily Market AI Summary</PageTitle>
+<PageTitle>@(isEnglish ? "Daily Market AI Summary" : "Poranne Podsumowanie Rynku AI")</PageTitle>
 
 <div class="container mt-4">
-    <h2 class="fw-bold">🤖 Poranne Podsumowanie AI</h2>
-    <p class="text-muted">Syntetyczna analiza globalnego sentymentu rynkowego i makroekonomicznego</p>
-    <hr />
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+        <div>
+            <h2 class="fw-bold mb-0">🤖 @(isEnglish ? "Daily AI Market Summary" : "Poranne Podsumowanie AI")</h2>
+            <p class="text-muted mb-0">
+                @(isEnglish
+                    ? "Synthetic analysis of global market sentiment and macroeconomic trends"
+                    : "Syntetyczna analiza globalnego sentymentu rynkowego i makroekonomicznego")
+            </p>
+        </div>
+
+        <div class="lang-switch shadow-sm @(isEnglish ? "en-active" : "pl-active")">
+            <div class="lang-slider"></div>
+            <button type="button" class="lang-btn @(!isEnglish ? "active" : "")" @onclick="() => isEnglish = false">
+                 PL
+            </button>
+            <button type="button" class="lang-btn @(isEnglish ? "active" : "")" @onclick="() => isEnglish = true">
+                 EN
+            </button>
+        </div>
+    </div>
+
+    <hr class="my-3" />
 
     @if (latestSnippet == null)
     {
         <div class="alert alert-warning shadow-sm border-0" role="alert">
-            <h5 class="alert-heading">Brak danych!</h5>
-            <p>Trwa ładowanie najświeższych danych z bazy lub Nocny Orkiestrator jeszcze nie wygenerował dzisiejszego raportu z powodu przeciążeń sieci.</p>
+            <h5 class="alert-heading">@(isEnglish ? "No data available!" : "Brak danych!")</h5>
+            <p>
+                @(isEnglish
+                    ? "Loading latest data...."
+                    : "Trwa ładowanie danych...")
+            </p>
         </div>
     }
     else
     {
-        <div class="card shadow border-0 bg-light mt-4 mb-4">
+        <div class="card shadow-sm border-0 bg-light mt-3 mb-4">
             <div class="card-body p-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h5 class="card-title text-primary mb-0">Sentyment Wall Street</h5>
-                    <span class="badge bg-secondary">@latestSnippet.CreatedAt.ToLocalTime().ToString("g")</span>
+                    <h5 class="card-title text-primary mb-0">
+                        @(isEnglish ? "Wall Street Sentiment" : "Sentyment Wall Street")
+                    </h5>
+                    <span class="badge bg-secondary">
+                        @latestSnippet.CreatedAt.ToLocalTime().ToString("g")
+                    </span>
                 </div>
 
-                <div class="card-text mt-3" style="font-size: 1.15rem; line-height: 1.7;">
-                    @((MarkupString)Markdown.ToHtml(latestSnippet.Content))
+                <div class="card-text mt-3" style="font-size: 1.1rem; line-height: 1.7;">
+                    @((MarkupString)Markdown.ToHtml(GetActiveContent()))
                 </div>
             </div>
         </div>
@@ -38,12 +65,25 @@
 
 @code {
     private MarketSnippet? latestSnippet;
+    private bool isEnglish = false;
 
     protected override async Task OnInitializedAsync()
     {
-       
         latestSnippet = await DbContext.MarketSnippets
-                                       .OrderByDescending(s => s.CreatedAt)
-                                       .FirstOrDefaultAsync();
+                                      .OrderByDescending(s => s.CreatedAt)
+                                      .FirstOrDefaultAsync();
+    }
+
+    private string GetActiveContent()
+    {
+        if (latestSnippet == null) return string.Empty;
+
+    
+        if (isEnglish && !string.IsNullOrWhiteSpace(latestSnippet.ContentEn))
+        {
+            return latestSnippet.ContentEn;
+        }
+
+        return latestSnippet.Content;
     }
 }
