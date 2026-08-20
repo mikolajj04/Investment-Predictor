@@ -4,15 +4,37 @@
 <head>
     <meta charset="utf-8" />
     <title>MJ Invest Calc - Twój Kalkulator Inwestycyjny</title>
-    <meta name="description" content="Licz zwroty z inwestycji i czytaj poranne podsumowania rynku. Kalkulator inwestycyjny z analizą AI.">
+    <meta name="description" content="Kalkulator inwestycyjny z rynkową analizą AI. Symuluj zyski z procentu składanego i sprawdzaj codzienne nastroje na rynku w języku polskim i angielskim.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <base href="/" />
     <link rel="stylesheet" href="bootstrap/bootstrap.min.css" />
     <link rel="stylesheet" href="app.css" />
+
     <link rel="stylesheet" href="InvestmentCalculator.WebApp.styles.css" />
     <link rel="icon" type="image/png" href="myIcon.png" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <HeadOutlet @rendermode="InteractiveServer" />
+
+    <script type="application/ld+json">
+            {
+              "@@context": "https://schema.org",
+              "@@type": "WebApplication",
+              "name": "MJ Invest Calc",
+              "url": "https://mj-invest-calc.azurewebsites.net",
+              "description": "Profesjonalny kalkulator inwestycyjny z porannymi podsumowaniami rynku generowanymi przez sztuczną inteligencję w języku polskim i angielskim.",
+              "applicationCategory": "FinanceApplication",
+              "operatingSystem": "Web",
+              "author": {
+                "@@type": "Person",
+                "name": "Mikołaj Jussak"
+              },
+              "offers": {
+                "@@type": "Offer",
+                "price": "0",
+                "priceCurrency": "PLN"
+              }
+            }
+    </script>
 </head>
 
 <body>
