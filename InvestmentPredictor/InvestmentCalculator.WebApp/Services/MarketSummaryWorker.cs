@@ -77,7 +77,8 @@ namespace InvestmentCalculator.WebApp.Services
 
                                 var newSnippet = new MarketSnippet()
                                 {
-                                    Content = aiSummary,
+                                    Content = aiSummary.PolishSummary,
+                                    ContentEn = aiSummary.EnglishSummary,
                                     SummaryType = "Daily",
                                     CreatedAt = DateTime.UtcNow
 
