@@ -67,13 +67,17 @@ namespace InvestmentCalculator.WebApp.Services
                 throw new HttpRequestException($"API Gemini Error: {response.StatusCode} - details: {errorContent}");
             }
             var jsonResponse = await response.Content.ReadFromJsonAsync<JsonElement>();
-
+            var docOptions = new JsonDocumentOptions
+            {
+                AllowTrailingCommas = true
+            };
             var rawText = jsonResponse
                 .GetProperty("candidates")[0]
                 .GetProperty("content")
                 .GetProperty("parts")[0]
                 .GetProperty("text").GetString();
-            using var doc = JsonDocument.Parse(rawText!);
+
+            using var doc = JsonDocument.Parse(rawText!, docOptions);
             var pl = doc.RootElement.GetProperty("summaryPl").GetString() ?? string.Empty;
             var en = doc.RootElement.GetProperty("summaryEn").GetString() ?? string.Empty;
 
