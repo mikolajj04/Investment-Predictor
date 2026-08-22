@@ -31,17 +31,23 @@ namespace InvestmentCalculator.WebApp.Services
                           Wymogi formatowania:
                           1. BEZWZGLĘDNIE używaj formatowania Markdown do strukturyzacji tekstu (używaj `**` do pogrubień kluczowych firm/wniosków oraz `*` do tworzenia list wypunktowanych).
                           2. ZABRONIONE jest używanie jakichkolwiek znaczników HTML (żadnych tagów typu <b>, <p>, <br>).
-                          3. Rozpocznij od jednego, mocnego krótkiego streszczenia (Maksymalnie 4 zdania) podsumowującego ogólny nastrój na globalnych rynkach 
-                          4. Podziel analizę na wyraźne kategorie, używając wypunktowań dla każdego sektora obecnego w wiadomościach (np. 🌍 Makroekonomia / 🌍 Macroeconomics, 💡 Technologia / 💡 Technology, 💰 Finanse / 💰 Finance).
-                          5. Pisz treściwie. Wymieniaj nazwy firm, zjawiska i kierunek zmian. Zero lania wody.
+                          3. Rozpocznij od jednego, mocnego krótkiego streszczenia (około 4 zdania) podsumowującego ogólny nastrój na globalnych rynkach, po czym przejdź do dalszej analizy.
+                          4. Podziel analizę na wyraźne kategorie tematyczne: 
+                             - W wersji polskiej używaj nagłówków w stylu: 🌍 Makroekonomia, 💡 Technologia, 💰 Finanse.
+                             - W wersji angielskiej używaj ich odpowiedników: 🌍 Macroeconomics, 💡 Technology, 💰 Finance.
+                          5. Pisz treściwie, bez lania wody. Wymieniaj nazwy firm, zjawiska i kierunek zmian. Nie tłumacz nazw własnych firm.
                           6. Zignoruj artykuły, które nie wnoszą wartościowej wiedzy inwestycyjnej.
-                          7. Zwieńcz artykuł sekcją „🎯 **Kluczowe rekomendacje dla inwestora** / 🎯 **Key Takeaways for Investors**”. W formie wypunktowanej listy przedstaw strategiczne rady oparte na powyższej syntezie. Każdą radę sformułuj troche luźniej i bardziej prosto niż powyższe punkty (np. „Co warto monitorować”, „Gdzie szukać przewagi”).
+                          7. Zwieńcz artykuł sekcją rekomendacji:
+                            - W wersji polskiej nagłówek to: „🎯 **Kluczowe rekomendacje dla inwestora**”, a punkty zacznij od np. „Gdzie szukać przewagi:”, „Co warto monitorować:”, „Czego unikać:”.
+                            - W wersji angielskiej nagłówek to: „🎯 **Key Takeaways for Investors**”, a punkty zacznij od np. „Where to find an edge:”, „What to monitor:”, „What to avoid:”.
+                           Sekcję rekomendacji sformułuj troche luźniej i bardziej prosto i bezpośrednio w porównaniu do całego streszczenia.
                           8. Użyj poziomej linii Markdown (czyli `---`) DOKŁADNIE DWA RAZY: raz po zakończeniu wstępu, a drugi raz tuż przed sekcją z rekomendacjami.
+                          
                           ODPOWIEDZ WYŁĄCZNIE CZYSTYM OBIEKTEM JSON (bez znaczników markdown typu ```json):
-                            {{
-                              ""summaryPl"": ""...treść markdown po polsku..."",
-                              ""summaryEn"": ""...treść markdown po angielsku...""
-                            }}
+                          {{
+                            ""summaryPl"": ""...treść markdown po polsku..."",
+                            ""summaryEn"": ""...treść markdown po angielsku...""
+                          }}
 
                           Oto Wiadomości:
                           {string.Join("\n", articles)}";
