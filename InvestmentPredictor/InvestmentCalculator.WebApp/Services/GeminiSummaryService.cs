@@ -31,22 +31,23 @@ namespace InvestmentCalculator.WebApp.Services
                           Wymogi formatowania:
                           1. BEZWZGLĘDNIE używaj formatowania Markdown do strukturyzacji tekstu (używaj `**` do pogrubień kluczowych firm/wniosków oraz `*` do tworzenia list wypunktowanych).
                           2. ZABRONIONE jest używanie jakichkolwiek znaczników HTML (żadnych tagów typu <b>, <p>, <br>).
-                          3. Rozpocznij od jednego, mocnego krótkiego streszczenia (około 4 zdania) podsumowującego ogólny nastrój na globalnych rynkach, po czym przejdź do dalszej analizy.
-                          4. Podziel analizę na wyraźne kategorie tematyczne: 
-                             - W wersji polskiej używaj nagłówków w stylu: 🌍 Makroekonomia, 💡 Technologia, 💰 Finanse.
-                             - W wersji angielskiej używaj ich odpowiedników: 🌍 Macroeconomics, 💡 Technology, 💰 Finance.
+                          3. WSTĘP: Rozpocznij od jednego, mocnego krótkiego streszczenia (około 4 zdania) podsumowującego ogólny nastrój na globalnych rynkach, po czym BEZWZGLĘDNIE przejdź do dalszej analizy.
+                          4. ROZWINIĘCIE (Kategorie tematyczne): Podziel analizę na wyraźne kategorie tematyczne używając nagłówków trzeciego stopnia w Markdown (###):: 
+                             - W wersji polskiej używaj nagłówków w stylu: `### 🌍 Makroekonomia`, `### 💡 Technologia`, `### 💰 Finanse`.
+                             - W wersji angielskiej używaj ich odpowiedników: `### 🌍 Macroeconomics`, `### 💡 Technology`, `### 💰 Finance`.
                           5. Pisz treściwie, bez lania wody. Wymieniaj nazwy firm, zjawiska i kierunek zmian. Nie tłumacz nazw własnych firm.
                           6. Zignoruj artykuły, które nie wnoszą wartościowej wiedzy inwestycyjnej.
-                          7. Zwieńcz artykuł sekcją rekomendacji:
-                            - W wersji polskiej nagłówek to: „🎯 **Kluczowe rekomendacje dla inwestora**”, a punkty zacznij od np. „Gdzie szukać przewagi:”, „Co warto monitorować:”, „Czego unikać:”.
-                            - W wersji angielskiej nagłówek to: „🎯 **Key Takeaways for Investors**”, a punkty zacznij od np. „Where to find an edge:”, „What to monitor:”, „What to avoid:”.
+                          7. ZAKOŃCZENIE (Rekomendacje): Zwieńcz artykuł sekcją rekomendacji:
+                            - W wersji polskiej nagłówek to: `### 🎯 **Kluczowe rekomendacje dla inwestora**`, a punkty zacznij od np. „Gdzie szukać przewagi:”, „Co warto monitorować:”, „Czego unikać:”.
+                            - W wersji angielskiej nagłówek to: `### 🎯 **Key Takeaways for Investors**`, a punkty zacznij od np. „Where to find an edge:”, „What to monitor:”, „What to avoid:”.
                            Sekcję rekomendacji sformułuj troche luźniej i bardziej prosto i bezpośrednio w porównaniu do całego streszczenia.
                           8. Użyj poziomej linii Markdown (czyli `---`) DOKŁADNIE DWA RAZY: raz po zakończeniu wstępu, a drugi raz tuż przed sekcją z rekomendacjami.
-                          
-                          ODPOWIEDZ WYŁĄCZNIE CZYSTYM OBIEKTEM JSON (bez znaczników markdown typu ```json):
+                            ABSOLUTNIE KLUCZOWE: Musisz zawsze zostawić jedną PUSTĄ LINIĘ przed i po `---`. Nigdy nie doklejaj myślników bezpośrednio pod tekstem!
+
+                          ODPOWIEDZ WYŁĄCZNIE CZYSTYM OBIEKTEM JSON (bez znaczników markdown typu ```json). Używamy kluczy 'reportPl' i 'reportEn', aby wymusić pełną formę raportu:
                           {{
-                            ""summaryPl"": ""...treść markdown po polsku..."",
-                            ""summaryEn"": ""...treść markdown po angielsku...""
+                            ""reportPl"": ""...pełny tekst markdown po polsku..."",
+                            ""reportEn"": ""...pełny tekst markdown po angielsku...""
                           }}
 
                           Oto Wiadomości:
@@ -84,8 +85,8 @@ namespace InvestmentCalculator.WebApp.Services
                 .GetProperty("text").GetString();
 
             using var doc = JsonDocument.Parse(rawText!, docOptions);
-            var pl = doc.RootElement.GetProperty("summaryPl").GetString() ?? string.Empty;
-            var en = doc.RootElement.GetProperty("summaryEn").GetString() ?? string.Empty;
+            var pl = doc.RootElement.GetProperty("reportPl").GetString() ?? string.Empty;
+            var en = doc.RootElement.GetProperty("reportEn").GetString() ?? string.Empty;
 
             return new MarketSummaryResult(pl, en);
 
