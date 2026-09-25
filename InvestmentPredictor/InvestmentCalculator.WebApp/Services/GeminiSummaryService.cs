@@ -35,13 +35,13 @@ namespace InvestmentCalculator.WebApp.Services
                           4. ROZWINIĘCIE (Kategorie tematyczne): Podziel analizę na wyraźne kategorie tematyczne używając nagłówków trzeciego stopnia w Markdown (###):: 
                              - W wersji polskiej używaj nagłówków w stylu: `### 🌍 Makroekonomia`, `### 💡 Technologia`, `### 💰 Finanse`.
                              - W wersji angielskiej używaj ich odpowiedników: `### 🌍 Macroeconomics`, `### 💡 Technology`, `### 💰 Finance`.
-                          5. Pisz treściwie, bez lania wody. Wymieniaj nazwy firm, zjawiska i kierunek zmian. Nie tłumacz nazw własnych firm.
-                          6. Zignoruj artykuły, które nie wnoszą wartościowej wiedzy inwestycyjnej.
-                          7. ZAKOŃCZENIE (Rekomendacje): Zwieńcz artykuł sekcją rekomendacji:
-                            - W wersji polskiej nagłówek to: `### 🎯 **Kluczowe rekomendacje dla inwestora**`, a punkty zacznij od np. „Gdzie szukać przewagi:”, „Co warto monitorować:”, „Czego unikać:”.
-                            - W wersji angielskiej nagłówek to: `### 🎯 **Key Takeaways for Investors**`, a punkty zacznij od np. „Where to find an edge:”, „What to monitor:”, „What to avoid:”.
-                           Sekcję rekomendacji sformułuj troche luźniej i bardziej prosto i bezpośrednio w porównaniu do całego streszczenia.
-                          8. Użyj poziomej linii Markdown (czyli `---`) DOKŁADNIE DWA RAZY: raz po zakończeniu wstępu, a drugi raz tuż przed sekcją z rekomendacjami.
+                          5. Pisz treściwie, bez lania wody. Wymieniaj nazwy firm, zjawiska i kierunek zmian. Nie tłumacz nazw własnych firm. W części po Polsku (reportPl) unikaj kalek z języka angielskiego oraz zadbaj o poprawną polską składnię.
+                          6. Zignoruj artykuły, które nie wnoszą wartościowej wiedzy inwestycyjnej. BEZWZGLĘDNIE weryfikuj spójność logiczną i merytoryczną faktów, zanim umieścisz je w raporcie. Niedopuszczalne są wewnętrzne sprzeczności w wygenerowanym tekście.
+                          7. ZAKOŃCZENIE (Kluczowe obserwacje): Zwieńcz artykuł sekcją kluczowych obserwacji rynkowych:
+                            - W wersji polskiej nagłówek to: `### 🎯 **Kluczowe obserwacje rynkowe**`, a punkty zacznij od np. „Gdzie szukać przewagi:”, „Co warto monitorować:”, „Czego unikać:”.
+                            - W wersji angielskiej nagłówek to: `### 🎯 **Market Observations & Takeaways**`, a punkty zacznij od np. „Where to find an edge:”, „What to monitor:”, „What to avoid:”.
+                           Sekcję kluczowych obserwacji sformułuj troche luźniej i bardziej prosto i bezpośrednio w porównaniu do całego streszczenia.
+                          8. Użyj poziomej linii Markdown (czyli `---`) DOKŁADNIE DWA RAZY: raz po zakończeniu wstępu, a drugi raz tuż przed sekcją z kluczowymi obserwacjami.
                             ABSOLUTNIE KLUCZOWE: Musisz zawsze zostawić jedną PUSTĄ LINIĘ przed i po `---`. Nigdy nie doklejaj myślników bezpośrednio pod tekstem!
 
                           ODPOWIEDZ WYŁĄCZNIE CZYSTYM OBIEKTEM JSON (bez znaczników markdown typu ```json). Używamy kluczy 'reportPl' i 'reportEn', aby wymusić pełną formę raportu:
@@ -56,16 +56,21 @@ namespace InvestmentCalculator.WebApp.Services
             var requestBody = new
             {
                 contents = new[]
-                {
-                    new { parts = new[] { new { text = prompt } } }
-                },
+     {
+        new { parts = new[] { new { text = prompt } } }
+    },
                 generationConfig = new
                 {
-                    responseMimeType = "application/json"
+                    temperature = 0.4,
+                    responseMimeType = "application/json",
+                    thinkingConfig = new
+                    {
+                        thinkingBudget = 512
+                    }
                 }
             };
 
-            var url = $"https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-lite-latest:generateContent?key={_apiKey}";
+            var url = $"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key={_apiKey}";
             var response = await _httpClient.PostAsJsonAsync(url, requestBody);
             if (!response.IsSuccessStatusCode)
             {
