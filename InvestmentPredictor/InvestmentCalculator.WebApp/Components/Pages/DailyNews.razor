@@ -10,7 +10,7 @@
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
         <div>
-            <h2 class="fw-bold mb-0">🤖 @(isEnglish ? "Daily AI Market Summary" : "Poranne Podsumowanie AI")</h2>
+            <h2 class="fw-bold mb-0">🤖 @(isEnglish ? "Daily AI Market Summary" : "Poranne podsumowanie AI")</h2>
             <p class="text-muted mb-0">
                 @(isEnglish
                     ? "Synthetic analysis of global market sentiment and macroeconomic trends"
@@ -48,7 +48,7 @@
             <div class="card-body p-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h5 class="card-title text-primary mb-0">
-                        @(isEnglish ? "Wall Street Sentiment" : "Sentyment Wall Street")
+                        @(isEnglish ? "Wall Street Sentiment" : "Sentyment na Wall Street")
                     </h5>
                     <span class="badge bg-secondary">
                         @latestSnippet.CreatedAt.ToLocalTime().ToString("g")
@@ -59,6 +59,13 @@
                     @((MarkupString)Markdown.ToHtml(GetActiveContent()))
                 </div>
             </div>
+        </div>
+
+
+        <div class="text-muted text-center" style="font-size: 0.70rem; margin-top: 15px; margin-bottom: 30px;">
+            @(isEnglish
+               ? "* Data generated automatically by an AI model. This summary does not constitute investment advice."
+               : "* Dane generowane automatycznie przez model AI. To podsumowanie nie stanowi porady inwestycyjnej.")
         </div>
     }
 </div>
