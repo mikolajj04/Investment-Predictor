@@ -24,7 +24,13 @@ namespace InvestmentPredictor
             {
                 client.BaseAddress = new Uri("https://www.alphavantage.co/");
             });
-            builder.Services.AddHttpClient<IAiSummaryService, GeminiSummaryService>().AddStandardResilienceHandler();
+            builder.Services.AddHttpClient<IAiSummaryService, GeminiSummaryService>().AddStandardResilienceHandler(options =>
+            {
+               
+                options.AttemptTimeout.Timeout = TimeSpan.FromMinutes(2);
+                options.TotalRequestTimeout.Timeout = TimeSpan.FromMinutes(3);
+                options.CircuitBreaker.SamplingDuration = TimeSpan.FromMinutes(4);
+            });
             builder.Services.AddHostedService<MarketSummaryWorker>();
             if (!builder.Environment.IsDevelopment())
             {
