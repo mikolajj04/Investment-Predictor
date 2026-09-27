@@ -44,7 +44,7 @@ The application is logically split into two, decoupled product modules:
 *   **Ergonomic UI:** Responsive "Drawer" style navigation built specifically for Mobile and Desktop viewports. 
 
 ### 🤖 2. Daily AI News (Market Intelligence Hub)
-![AI News Showcase](./images/AI_News_Showcase.gif)
+![AI News Showcase](./images/AI_Daily_News_Showcase.gif)
 *   **Automated Aggregation:** A fully asynchronous pipeline pulling financial market updates and stock sentiment data using the Alpha Vantage API.
 *   **AI Synthesis & Summarization:** Advanced NLP orchestration powered by the Gemini API, generating smart, context-aware morning market reports.
 *   **Decoupled Orchestration:** Background worker executing scheduled cron-like updates independently of client traffic.
@@ -115,4 +115,4 @@ The project follows **Clean Architecture** principles to ensure scalability.
 Distributed under the **MIT License**. See [`LICENSE`](./LICENSE) for more information.
 
 
-**Author:** **[Mikołaj Jussak](https://github.com/mikolajj04)** – Computer Science Student at Silesian University of Technology.
+**Author:** [Mikołaj Jussak](https://github.com/mikolajj04) | [ProperType](https://propertype.dev)
