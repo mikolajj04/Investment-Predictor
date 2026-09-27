@@ -161,3 +161,14 @@ h1:focus {
     border-color: rgba(16, 185, 129, 0.5) !important;
     box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2) !important; 
 }
+.footer-link {
+    color: inherit !important; 
+    text-decoration: none !important; 
+    font-weight: 600; 
+    transition: color 0.2s ease;
+}
+
+    .footer-link:hover {
+        color: #10b981 !important; 
+        text-decoration: underline !important;
+    }
