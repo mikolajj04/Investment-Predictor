@@ -170,7 +170,7 @@
 	{
 
 
-		if (monthlySubsidy < 0 || period <= 0 || initialAmount < 0 || (chosenIndex == MarketIndex.Custom) && customRate < 0)
+		if (monthlySubsidy < 0 || period <= 0 || period > 200 || initialAmount < 0 || (chosenIndex == MarketIndex.Custom) && customRate < 0)
 		{
 			ErrorMessage = "Set proper parameters!";
 			return;
