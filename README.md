@@ -110,9 +110,15 @@ The project follows **Clean Architecture** principles to ensure scalability.
 <br>
 <br>
 
+
 ## ⚖️ License & Credits
 
-Distributed under the **MIT License**. See [`LICENSE`](./LICENSE) for more information.
-
-
-**Author:** [Mikołaj Jussak](https://github.com/mikolajj04) | [ProperType](https://propertype.dev)
+<div align="center">
+<p>
+  <p>
+    <img src="./images/PT_mark.png" alt="ProperType" width="30" align="absmiddle" />
+    Copyright (c) 2026 &nbsp;<a href="https://github.com/mikolajj04">Mikołaj Jussak</a> | <a href="https://propertype.dev">ProperType</a>. <br>
+    Distributed under the <b>MIT License</b>. See <a href="./LICENSE">LICENSE</a> for more information.
+  </p>
+</p>
+</div>
