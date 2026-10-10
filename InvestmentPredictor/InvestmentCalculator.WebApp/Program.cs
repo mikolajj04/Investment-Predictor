@@ -22,7 +22,7 @@ namespace InvestmentPredictor
             builder.Services.AddScoped<IInvestmentCalculator, InvestmentPredictor.Core.InvestmentCalculator>();
             builder.Services.AddHttpClient<IMarketNewsService, MarketNewsService>(client=>
             {
-                client.BaseAddress = new Uri("https://www.alphavantage.co/");
+                client.BaseAddress = new Uri("https://https://finnhub.io/api/v1/");
             });
             builder.Services.AddHttpClient<IAiSummaryService, GeminiSummaryService>().AddStandardResilienceHandler(options =>
             {
