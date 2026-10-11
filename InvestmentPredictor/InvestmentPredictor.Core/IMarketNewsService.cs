@@ -4,6 +4,6 @@ namespace InvestmentPredictor.Core
 {
     public interface IMarketNewsService
     {
-        Task<List<NewsArticles>> GetMarketNewsAsync();
+        Task<string?> GetMarketNewsSummaryAsync();
     }
 }
