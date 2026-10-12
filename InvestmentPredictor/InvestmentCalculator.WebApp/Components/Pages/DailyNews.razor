@@ -7,10 +7,10 @@
 
 <PageTitle>@(isEnglish ? "Daily Market AI Summary" : "Poranne Podsumowanie Rynku AI")</PageTitle>
 
-<div class="container mt-4">
+<div class="container px-2 px-sm-3 mt-4">
     <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
         <div>
-            <h2 class="fw-bold mb-0">🤖 @(isEnglish ? "Daily AI Market Summary" : "Poranne podsumowanie AI")</h2>
+            <h2 class="calc-title-clean">🤖 @(isEnglish ? "Daily AI Market Summary" : "Poranne podsumowanie AI")</h2>
             <p class="text-muted mb-0">
                 @(isEnglish
                     ? "Synthetic analysis of global market sentiment and macroeconomic trends"
@@ -29,7 +29,7 @@
         </div>
     </div>
 
-    <hr class="my-3" />
+    
 
     @if (latestSnippet == null)
     {
@@ -45,16 +45,16 @@
     else
     {
         <div class="card shadow-sm border-0 bg-light mt-3 mb-4">
-            <div class="card-body p-4">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h5 class="card-title text-primary mb-0">
-                        @(isEnglish ? "Wall Street Sentiment" : "Sentyment na Wall Street")
+            <div class="card-body px-3 py-3 p-sm-4">
+                <div div class="d-flex align-items-center mb-3"">
+                    <h5 class="card-title text-primary mb-0 glass-title-blue hide-on-micro">
+             @(isEnglish ? "Wall Street Sentiment" : "Sentyment na Wall Street")
                     </h5>
-                    <span class="badge bg-secondary">
+                    <span class="badge bg-secondary ms-auto">
                         @latestSnippet.CreatedAt.ToLocalTime().ToString("g")
                     </span>
                 </div>
-
+                <hr class="my-3" />
                 <div class="card-text mt-3" style="font-size: 1.1rem; line-height: 1.7;">
                     @((MarkupString)Markdown.ToHtml(GetActiveContent()))
                 </div>
