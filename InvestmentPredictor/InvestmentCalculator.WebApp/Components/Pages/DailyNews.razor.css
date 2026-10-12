@@ -57,11 +57,29 @@
 
 
 .badge {
-    background: rgba(15, 23, 42, 0.06) !important;
-    color: #475569 !important;
-    border: 1px solid rgba(15, 23, 42, 0.1);
+    background: rgba(15, 23, 42, 0.04) !important;
+    color: rgba(0, 0, 0, 0.4) !important;
+    border: 1px solid rgba(15, 23, 42, 0.05);
     font-weight: 700;
     padding: 0.6em 1em;
     border-radius: 20px;
-    font-family: "JetBrains Mono", "Inter", sans-serif; 
+    font-family: "JetBrains Mono", "Inter", sans-serif;
+}
+.glass-title-blue {
+    color: rgba(13, 110, 253, 0.5) !important;
+    background: rgba(13, 110, 253, 0.02);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(13, 110, 253, 0.10);
+    box-shadow: 0 2px 8px rgba(13, 110, 253, 0.03);
+    border-radius: 8px;
+    padding: 0.35rem 0.8rem;
+    display: inline-block;
+    font-weight: 600;
+    letter-spacing: -0.01em; 
+}
+@media (max-width: 450px) {
+    .hide-on-micro {
+        display: none !important;
+    }
 }

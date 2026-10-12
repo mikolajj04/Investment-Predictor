@@ -49,13 +49,8 @@ namespace InvestmentCalculator.WebApp.Services
                             var newsService = scope.ServiceProvider.GetRequiredService<IMarketNewsService>();
                             var aiService = scope.ServiceProvider.GetRequiredService<IAiSummaryService>();
 
-                            var rawNews = await newsService.GetMarketNewsAsync();
-                            var topArticles = rawNews
-                              .Where(n => Math.Abs(n.SentimentScore) >= 0.15)
-                              .OrderByDescending(n => Math.Abs(n.SentimentScore))
-                              .Take(15)
-                              .Select(n => $"{n.Title}: {n.Summary}")
-                              .ToList();
+                            var newsTextContext = await newsService.GetMarketNewsSummaryAsync();
+                            if (!string.IsNullOrWhiteSpace(newsTextContext)) { 
 
                             //---MOCK Articles----
                             //var topArticles = new List<string>
@@ -66,10 +61,9 @@ namespace InvestmentCalculator.WebApp.Services
                             //    "Technologia: Gemini Flash-Lite rewolucjonizuje rynek systemów automatyzacji backendu w chmurze."
                             //};
 
-                            if (topArticles.Any())
-                            {
-                                _logger.LogInformation($"Sending {topArticles.Count} articles to AI brain...");
-                                var aiSummary = await aiService.GenerateMarketSummaryAsync(topArticles);
+                            
+                                _logger.LogInformation("Sending news text payload to AI brain...");
+                                var aiSummary = await aiService.GenerateMarketSummaryAsync(newsTextContext);
 
                                 //---MOCK Gemini----
                                 //var aiSummary = "🤖 [Mock AI]: Rynek technologiczny w fazie silnej korekty. Akcje Tesli nieznacznie tracą na wartości w obliczu nowych danych produkcyjnych, natomiast Microsoft kontynuuje stabilny wzrost napędzany gigantycznym popytem na usługi chmurowe Azure i rozwiązania sztucznej inteligencji.";
@@ -90,7 +84,7 @@ namespace InvestmentCalculator.WebApp.Services
                             }
                             else
                             {
-                                _logger.LogWarning("No news from AlphaVantage. Terminating process.");
+                                _logger.LogWarning("No news from Finhub or API error. Terminating process for this cycle.");
                             }
 
                         }
@@ -103,7 +97,7 @@ namespace InvestmentCalculator.WebApp.Services
 
                 }catch(Exception ex)
                 {
-                    _logger.LogError(ex, "Critical Error in Night AI Orchestrator");
+                    _logger.LogError(ex, "Critical Error in AI Orchestrator");
                 }
 
                 _logger.LogInformation("Orchestrator went to sleep for next 10 minutes");

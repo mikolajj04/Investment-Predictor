@@ -1,0 +1,6 @@
+services:
+  investmentcalculator.webapp:
+    image: ${DOCKER_REGISTRY-}investmentcalculatorwebapp
+    build:
+      context: .
+      dockerfile: InvestmentCalculator.WebApp/Dockerfile

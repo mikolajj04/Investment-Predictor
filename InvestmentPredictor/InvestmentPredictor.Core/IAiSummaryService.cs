@@ -9,6 +9,6 @@ namespace InvestmentPredictor.Core
 {
     public interface IAiSummaryService
     {
-        Task<MarketSummaryResult> GenerateMarketSummaryAsync(List<string> articles);
+        Task<MarketSummaryResult> GenerateMarketSummaryAsync(string articles);
     }
 }

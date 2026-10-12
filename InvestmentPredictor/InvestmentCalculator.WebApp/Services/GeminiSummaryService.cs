@@ -17,7 +17,7 @@ namespace InvestmentCalculator.WebApp.Services
 
         }
 
-        public async Task<MarketSummaryResult> GenerateMarketSummaryAsync(List<string> articles)
+        public async Task<MarketSummaryResult> GenerateMarketSummaryAsync(string articles)
         {
             if(articles == null || !articles.Any())
             {
@@ -25,18 +25,18 @@ namespace InvestmentCalculator.WebApp.Services
             }
 
             var prompt = $@"
-                          Jesteś głównym analitykiem makroekonomicznym Wall Street. Otrzymujesz zestawienie najważniejszych wiadomości globalnych o największym ładunku emocjonalnym (sentyment giełdowy).
-                          Twoim zadaniem jest stworzenie profesjonalnego, ustrukturyzowanego podsumowania dla inwestorów w DWÓCH wersjach językowych: polskiej i angielskiej.
+                          Jesteś głównym analitykiem makroekonomicznym Wall Street. Twoim zadaniem jest stworzenie profesjonalnego, ustrukturyzowanego podsumowania dla inwestorów na podstawie dostarczonych surowych wiadomości.
 
                           Wymogi formatowania:
                           1. BEZWZGLĘDNIE używaj formatowania Markdown do strukturyzacji tekstu (używaj `**` do pogrubień kluczowych firm/wniosków oraz `*` do tworzenia list wypunktowanych).
                           2. ZABRONIONE jest używanie jakichkolwiek znaczników HTML (żadnych tagów typu <b>, <p>, <br>).
                           3. WSTĘP: Rozpocznij od jednego, mocnego krótkiego streszczenia (około 4 zdania) podsumowującego ogólny nastrój na globalnych rynkach, po czym BEZWZGLĘDNIE przejdź do dalszej analizy.
                           4. ROZWINIĘCIE (Kategorie tematyczne): Podziel analizę na wyraźne kategorie tematyczne używając nagłówków trzeciego stopnia w Markdown (###):: 
-                             - W wersji polskiej używaj nagłówków w stylu: `### 🌍 Makroekonomia`, `### 💡 Technologia`, `### 💰 Finanse`.
+                             - W wersji polskiej używaj nagłówków w stylu: `### 🌍 Makroekonomia`, `### 💡 Technologia`, `### 💰 Finanse`. 
                              - W wersji angielskiej używaj ich odpowiedników: `### 🌍 Macroeconomics`, `### 💡 Technology`, `### 💰 Finance`.
-                          5. Pisz treściwie, bez lania wody. Wymieniaj nazwy firm, zjawiska i kierunek zmian. Nie tłumacz nazw własnych firm. W części po Polsku (reportPl) unikaj kalek z języka angielskiego oraz zadbaj o poprawną polską składnię.
-                          6. Zignoruj artykuły, które nie wnoszą wartościowej wiedzy inwestycyjnej. BEZWZGLĘDNIE weryfikuj spójność logiczną i merytoryczną faktów, zanim umieścisz je w raporcie. Niedopuszczalne są wewnętrzne sprzeczności w wygenerowanym tekście.
+                             - Wyżej wymienione nagłówki to przykłady, sam dopasuj od 2 do 5 NAJWAŻNIEJSZYCH obszarów tematycznych na dany dzień. Dopasuj do nich odpowiednie emotikony i oznacz nagłówkiem trzeciego stopnia (###). (Kolejne przykłady: `### 🛢️ Rynek Ropy i Surowców`, `### 🤖 AI i Półprzewodniki`, `### 🏦 Decyzje Banków Centralnych`, i tak dalej...) -  Reaguj na to, czym faktycznie żyje rynek.
+                          5. Pisz treściwie, bez lania wody. Łącz kropki i agreguj powiązane informacje z różnych źródeł w spójną narrację. Wymieniaj nazwy firm, zjawiska i kierunek zmian. Nie tłumacz nazw własnych firm. W części po Polsku (reportPl) unikaj kalek z języka angielskiego oraz zadbaj o poprawną polską składnię.
+                          6. Zignoruj artykuły, które nie wnoszą wartościowej wiedzy inwestycyjnej. BEZWZGLĘDNIE weryfikuj spójność logiczną i merytoryczną faktów, zanim umieścisz je w raporcie. Niedopuszczalne są wewnętrzne sprzeczności w wygenerowanym tekście. Jeśli dostarczone wiadomości są ubogie (np. sesja weekendowa) lub nieistotne, wprost to zaznacz, unikając sztucznego pompowania paniki lub optymizmu.
                           7. ZAKOŃCZENIE (Kluczowe obserwacje): Zwieńcz artykuł sekcją kluczowych obserwacji rynkowych:
                             - W wersji polskiej nagłówek to: `### 🎯 **Kluczowe obserwacje rynkowe**`, a punkty zacznij od np. „Gdzie szukać przewagi:”, „Co warto monitorować:”, „Czego unikać:”.
                             - W wersji angielskiej nagłówek to: `### 🎯 **Market Observations & Takeaways**`, a punkty zacznij od np. „Where to find an edge:”, „What to monitor:”, „What to avoid:”.
@@ -51,7 +51,7 @@ namespace InvestmentCalculator.WebApp.Services
                           }}
 
                           Oto Wiadomości:
-                          {string.Join("\n", articles)}";
+                          {articles}";
 
             var requestBody = new
             {
