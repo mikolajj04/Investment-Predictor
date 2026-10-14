@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using System.Text.Json;
+﻿using System.Text.Json;
 using InvestmentPredictor.Core;
 using InvestmentPredictor.Core.DTOs;
 
@@ -63,6 +62,16 @@ namespace InvestmentCalculator.WebApp.Services
                 {
                     temperature = 0.4,
                     responseMimeType = "application/json",
+                    responseSchema = new
+                    {
+                        type = "OBJECT",
+                        properties = new
+                        {
+                            reportPl = new { type = "STRING" },
+                            reportEn = new { type = "STRING" }
+                        },
+                        required = new[] { "reportPl", "reportEn" }
+                    },
                     thinkingConfig = new
                     {
                         thinkingBudget = 512
