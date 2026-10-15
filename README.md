@@ -17,7 +17,7 @@ A professional investment calculator and market analysis platform built using **
 > ℹ️ **Hosting Note:** This live demo is deployed on a free Microsoft Azure App Service instance. While free cloud tiers traditionally suffer from idle timeouts and delayed initial requests ("cold starts"), this application implements an automated keep-alive mechanism orchestrated via **Cron-job.org**. By scheduling high-frequency synthetic pings, the runtime container remains persistently warm, ensuring sub-second response times for immediate user access.
 
 > [!WARNING]
-> News generation is being tested and might be temporarily unstable. The news data provider is currently being migrated to a new API. All other features remain fully functional.
+> News generation is being tested and might be temporarily unstable. The news data provider is currently being migrated to a new API (Alpha Vantage -> Finnhub). All other features remain fully functional.
 
 ---
 
