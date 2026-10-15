@@ -29,7 +29,7 @@ A professional investment calculator and market analysis platform built using **
 | **UI Framework** | Bootstrap 5 (Responsive / Mobile-First design) |
 | **Data Visualization** | ApexCharts.Blazor |
 | **ORM & Database** | Entity Framework Core / Azure Database for PostgreSQL (Flexible Server) |
-| **AI & External APIs** | Google Gemini API / Alpha Vantage API |
+| **AI & External APIs** | Google Gemini API / Finnhub API |
 | **Background Processes** | .NET Hosted Services (IHostedService) |
 | **Containerization** | Docker / Docker Compose |
 | **Testing Engine** | xUnit / FluentAssertions |
@@ -49,14 +49,14 @@ The application is logically split into two, decoupled product modules:
 
 ### 🤖 2. Daily AI News (Market Intelligence Hub)
 ![AI News Showcase](./images/AI_Daily_News_Showcase.gif)
-*   **Automated Aggregation:** A fully asynchronous pipeline pulling financial market updates and stock sentiment data using the Alpha Vantage API.
+*   **Automated Aggregation:** A fully asynchronous pipeline pulling financial market updates using the Finnhub API.
 *   **AI Synthesis & Summarization:** Advanced NLP orchestration powered by the Gemini API, generating smart, context-aware morning market reports.
 *   **Decoupled Orchestration:** Background worker executing scheduled cron-like updates independently of client traffic.
 *   **Persistent Analytics Cache:** All market snapshots are fully structured and saved via EF Core into an isolated cloud database (PostgreSQL) for instant retrieval speeds.
 *   **Dual-Language Generation:** The Gemini API pipeline leverages structured JSON output to generate both Polish and English market reports in a single call, allowing users to seamlessly toggle languages without reloading the application.
 ### ⏱️ Data Aggregation Strategy (08:30 CET/CEST Execution)
 
-The background orchestrator (IHostedService) implements a robust polling mechanism rather than a rigid task schedule. It is designed to execute the Alpha Vantage API pipeline daily within a 10-minute execution window immediately following **08:30 AM** local Polish time. This approach ensures maximum fault tolerance (against third-party API instability) and adaptability to cloud environment hibernation cycles.
+The background orchestrator (IHostedService) implements a robust polling mechanism rather than a rigid task schedule. It is designed to execute the Finnhub API pipeline daily within a 10-minute execution window immediately following **08:30 AM** local Polish time. This approach ensures maximum fault tolerance (against third-party API instability) and adaptability to cloud environment hibernation cycles.
 
 #### 1. Business Logic (Why 08:30?):
 This execution window consolidates a global market snapshot just before the European trading session begins:
@@ -66,7 +66,7 @@ This execution window consolidates a global market snapshot just before the Euro
 
 #### 2. Technical Implementation & Resilience:
 * **Timezone Handling:** Utilizes TimeZoneInfo to strictly bind execution to Central European Standard Time. This ensures the schedule remains immune to Azure's default UTC host configuration and automatically adjusts for DST (Daylight Saving Time) shifts.
-* **API Rate Limit Protection:** To strictly respect Alpha Vantage free-tier limits, the orchestrator queries the PostgreSQL database (AnyAsync) to verify if a daily report already exists before initiating any external HTTP calls.
+* **API Rate Limit Protection:** To strictly respect Finnhub free-tier limits, the orchestrator queries the PostgreSQL database (AnyAsync) to verify if a daily report already exists before initiating any external HTTP calls.
 * **Fault Tolerance:** In case of API timeouts or empty responses, the system catches the exception and defers execution, sleeping for 10-minute intervals until the data is successfully fetched and saved.
 
 ## 📁 Project Structure
@@ -103,7 +103,7 @@ The project follows **Clean Architecture** principles to ensure scalability.
     docker compose up -d
     ```
 3.  Open the solution file `InvestmentPredictor.sln` inside your IDE.
-4.  Configure your local secrets or environment variables for the Gemini and Alpha Vantage integrations.
+4.  Configure your local secrets or environment variables for the Gemini and Finnhub integrations.
 5.  Set `InvestmentCalculator.WebApp` as the startup project and press **F5** to compile and run.
 
 
