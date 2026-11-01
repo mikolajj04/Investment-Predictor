@@ -78,6 +78,32 @@
     font-weight: 600;
     letter-spacing: -0.01em; 
 }
+.sentiment-track {
+    height: 10px;
+}
+
+.sentiment-bar {
+    height: 6px;
+    border-radius: 4px;
+    background: linear-gradient(to right, #ef4444 0%, #eab308 50%, #22c55e 100%);
+    position: absolute;
+    top: 2px;
+    left: 0;
+    right: 0;
+}
+
+.sentiment-marker {
+    position: absolute;
+    top: -3px;
+    width: 14px;
+    height: 14px;
+    background-color: #ffffff;
+    border: 2px solid #333333;
+    border-radius: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    transition: left 0.5s ease-out;
+}
 @media (max-width: 450px) {
     .hide-on-micro {
         display: none !important;
