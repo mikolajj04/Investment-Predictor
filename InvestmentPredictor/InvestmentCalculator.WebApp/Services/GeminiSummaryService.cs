@@ -20,7 +20,7 @@ namespace InvestmentCalculator.WebApp.Services
         {
             if(articles == null || !articles.Any())
             {
-                return new MarketSummaryResult("Brak danych do streszczenia", "No news to summarize");
+                return new MarketSummaryResult("Brak danych do streszczenia", "No news to summarize", 0);
             }
 
             var prompt = $@"
@@ -42,11 +42,13 @@ namespace InvestmentCalculator.WebApp.Services
                            Sekcję kluczowych obserwacji sformułuj troche luźniej i bardziej prosto i bezpośrednio w porównaniu do całego streszczenia.
                           8. Użyj poziomej linii Markdown (czyli `---`) DOKŁADNIE DWA RAZY: raz po zakończeniu wstępu, a drugi raz tuż przed sekcją z kluczowymi obserwacjami.
                             ABSOLUTNIE KLUCZOWE: Musisz zawsze zostawić jedną PUSTĄ LINIĘ przed i po `---`. Nigdy nie doklejaj myślników bezpośrednio pod tekstem!
+                          9. SENTYMENT RYNKOWY: Na podstawie dostarczonych wiadomości oszacuj ogólny sentyment globalnych rynków w skali całkowitej od 0 do 100 (0 - ekstremalny strach/wyprzedaż, 50 - neutralnie, 100 - ekstremalna chciwość/euforia).
 
-                          ODPOWIEDZ WYŁĄCZNIE CZYSTYM OBIEKTEM JSON (bez znaczników markdown typu ```json). Używamy kluczy 'reportPl' i 'reportEn', aby wymusić pełną formę raportu:
+                          ODPOWIEDZ WYŁĄCZNIE CZYSTYM OBIEKTEM JSON (bez znaczników markdown typu ```json). Używamy kluczy 'reportPl' , 'reportEn' oraz 'sentimentScore', aby wymusić pełną formę raportu:
                           {{
                             ""reportPl"": ""...pełny tekst markdown po polsku..."",
-                            ""reportEn"": ""...pełny tekst markdown po angielsku...""
+                            ""reportEn"": ""...pełny tekst markdown po angielsku..."",
+                            ""sentimentScore"": 0
                           }}
 
                           Oto Wiadomości:
@@ -68,9 +70,10 @@ namespace InvestmentCalculator.WebApp.Services
                         properties = new
                         {
                             reportPl = new { type = "STRING" },
-                            reportEn = new { type = "STRING" }
+                            reportEn = new { type = "STRING" },
+                            sentimentScore = new { type = "INTEGER" }
                         },
-                        required = new[] { "reportPl", "reportEn" }
+                        required = new[] { "reportPl", "reportEn","sentimentScore" }
                     },
                     thinkingConfig = new
                     {
@@ -101,8 +104,9 @@ namespace InvestmentCalculator.WebApp.Services
             using var doc = JsonDocument.Parse(rawText!, docOptions);
             var pl = doc.RootElement.GetProperty("reportPl").GetString() ?? string.Empty;
             var en = doc.RootElement.GetProperty("reportEn").GetString() ?? string.Empty;
+            var score = doc.RootElement.TryGetProperty("sentimentScore", out var scoreProp) ? scoreProp.GetInt32() : 50;
 
-            return new MarketSummaryResult(pl, en);
+            return new MarketSummaryResult(pl, en, Math.Clamp(score, 0, 100));
 
         }
         

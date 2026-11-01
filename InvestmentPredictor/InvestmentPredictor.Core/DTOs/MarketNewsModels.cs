@@ -10,7 +10,7 @@ namespace InvestmentPredictor.Core.DTOs
     }
         
 
-    public record MarketSummaryResult(string PolishSummary, string EnglishSummary);
+    public record MarketSummaryResult(string PolishSummary, string EnglishSummary, int SentimentScore);
 
 
 
