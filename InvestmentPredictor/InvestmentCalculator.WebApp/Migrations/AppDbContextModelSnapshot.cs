@@ -41,6 +41,9 @@ namespace InvestmentCalculator.WebApp.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<int?>("SentimentScore")
+                        .HasColumnType("integer");
+
                     b.Property<string>("SummaryType")
                         .IsRequired()
                         .HasColumnType("text");

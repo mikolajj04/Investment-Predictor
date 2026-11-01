@@ -73,6 +73,7 @@ namespace InvestmentCalculator.WebApp.Services
                                 {
                                     Content = aiSummary.PolishSummary,
                                     ContentEn = aiSummary.EnglishSummary,
+                                    SentimentScore = aiSummary.SentimentScore,
                                     SummaryType = "Daily",
                                     CreatedAt = DateTime.UtcNow
 

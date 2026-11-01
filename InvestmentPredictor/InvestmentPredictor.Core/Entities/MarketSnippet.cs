@@ -7,5 +7,6 @@
         public string ContentEn { get; set; } = string.Empty;
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public string SummaryType { get; set; } = "Daily";
+        public int? SentimentScore { get; set; }
     }
 }
