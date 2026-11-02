@@ -26,7 +26,7 @@ A professional investment calculator and market analysis platform built using **
 | :--- | :--- |
 | **Frontend / Presentation** | C# .NET 8 (Blazor Web App) |
 | **Render Mode** | Interactive Server (Real-time UI updates via SignalR) |
-| **UI Framework** | Bootstrap 5 (Responsive / Mobile-First design) |
+| **UI Framework** | Bootstrap 5 & Custom CSS (Responsive / Mobile-First design) |
 | **Data Visualization** | ApexCharts.Blazor |
 | **ORM & Database** | Entity Framework Core / Azure Database for PostgreSQL (Flexible Server) |
 | **AI & External APIs** | Google Gemini API / Finnhub API |
@@ -54,6 +54,11 @@ The application is logically split into two, decoupled product modules:
 *   **Decoupled Orchestration:** Background worker executing scheduled cron-like updates independently of client traffic.
 *   **Persistent Analytics Cache:** All market snapshots are fully structured and saved via EF Core into an isolated cloud database (PostgreSQL) for instant retrieval speeds.
 *   **Dual-Language Generation:** The Gemini API pipeline leverages structured JSON output to generate both Polish and English market reports in a single call, allowing users to seamlessly toggle languages without reloading the application.
+*   **Macro Sentiment Indicator:** A custom-built, responsive UI widget that visually translates the AI-computed sentiment score into a 0-100 gauge (Risk-On / Risk-Off), providing a quick barometer of global market risk appetite.
+
+<br>
+
+![Macro Sentiment Index](./images/Macro_Sentiment_Index.png)
 ### ⏱️ Data Aggregation Strategy (08:30 CET/CEST Execution)
 
 The background orchestrator (IHostedService) implements a robust polling mechanism rather than a rigid task schedule. It is designed to execute the Finnhub API pipeline daily within a 10-minute execution window immediately following **08:30 AM** local Polish time. This approach ensures maximum fault tolerance (against third-party API instability) and adaptability to cloud environment hibernation cycles.
